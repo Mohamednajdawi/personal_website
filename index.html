@@ -84,6 +84,49 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        
+        /* Mobile Responsiveness Improvements */
+        @media (max-width: 768px) {
+            /* Increase touch target sizes */
+            nav a, button, .mobile-friendly {
+                min-height: 44px;
+                min-width: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* Add proper spacing for touch targets */
+            .mobile-touch-spacing > * {
+                margin-bottom: 0.75rem;
+            }
+            
+            /* Ensure inputs have enough height */
+            input, textarea, select, button[type="submit"] {
+                min-height: 44px;
+                font-size: 16px; /* Prevent iOS zoom on focus */
+            }
+            
+            /* Improve scrolling experience */
+            html, body {
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
+            }
+            
+            /* Better mobile menu */
+            #mobile-menu {
+                max-height: 80vh;
+                overflow-y: auto;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+            
+            /* Active state for touch feedback */
+            .touch-active:active {
+                background-color: rgba(59, 130, 246, 0.1);
+                transform: scale(0.98);
+            }
+        }
     </style>
 </head>
 <body class="font-sans antialiased text-gray-800 bg-gray-50">
@@ -111,19 +154,19 @@
                     <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Contact</a>
                 </div>
                 <div class="md:hidden flex items-center">
-                    <button id="menu-btn" class="text-gray-700">
+                    <button id="menu-btn" class="text-gray-700 touch-active mobile-friendly p-2 rounded-md">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
         <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 px-4 shadow-lg">
-            <a href="#about" class="block py-2 text-gray-700 hover:text-blue-600 transition">About</a>
-            <a href="#experience" class="block py-2 text-gray-700 hover:text-blue-600 transition">Experience</a>
-            <a href="#skills" class="block py-2 text-gray-700 hover:text-blue-600 transition">Skills</a>
-            <a href="#projects" class="block py-2 text-gray-700 hover:text-blue-600 transition">Projects</a>
-            <a href="#contact" class="block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition text-center mt-2">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 px-4 shadow-lg mobile-touch-spacing">
+            <a href="#about" class="block py-3 px-2 text-gray-700 hover:text-blue-600 transition touch-active rounded-md">About</a>
+            <a href="#experience" class="block py-3 px-2 text-gray-700 hover:text-blue-600 transition touch-active rounded-md">Experience</a>
+            <a href="#skills" class="block py-3 px-2 text-gray-700 hover:text-blue-600 transition touch-active rounded-md">Skills</a>
+            <a href="#projects" class="block py-3 px-2 text-gray-700 hover:text-blue-600 transition touch-active rounded-md">Projects</a>
+            <a href="#contact" class="block bg-blue-600 text-white px-4 py-3 rounded-md hover:bg-blue-700 transition text-center mt-3 touch-active">Contact</a>
         </div>
     </nav>
 
@@ -638,26 +681,26 @@
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-                                    <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required>
+                                    <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 touch-active" required>
                                 </div>
                                 <div>
                                     <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
-                                    <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required>
+                                    <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 touch-active" required>
                                 </div>
                             </div>
                             
                             <div>
                                 <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                                <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required>
+                                <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 touch-active" required>
                             </div>
                             
                             <div>
                                 <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                                <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required></textarea>
+                                <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 touch-active" required></textarea>
                             </div>
                             
                             <div>
-                                <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition flex items-center justify-center">
+                                <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition flex items-center justify-center touch-active">
                                     Send Message
                                     <i class="fas fa-paper-plane ml-2"></i>
                                 </button>
@@ -754,7 +797,85 @@
             animateOnScroll();
             type();
             animateSkillBars();
+            
+            // Initialize mobile touch improvements
+            initMobileTouch();
         });
+        
+        // Mobile touch improvements
+        function initMobileTouch() {
+            // Add active state for touch feedback
+            const touchElements = document.querySelectorAll('.touch-active');
+            touchElements.forEach(el => {
+                el.addEventListener('touchstart', function() {
+                    this.classList.add('active');
+                });
+                el.addEventListener('touchend', function() {
+                    this.classList.remove('active');
+                });
+            });
+            
+            // Swipe gestures for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const threshold = 100; // Minimum swipe distance
+            
+            document.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            document.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeDistance = touchEndX - touchStartX;
+                
+                // If swipe left and menu is open, close it
+                if (swipeDistance < -threshold) {
+                    if (!document.getElementById('mobile-menu').classList.contains('hidden')) {
+                        document.getElementById('mobile-menu').classList.add('hidden');
+                    }
+                }
+                
+                // If swipe right and near left edge, open menu
+                if (swipeDistance > threshold && touchStartX < 50) {
+                    if (document.getElementById('mobile-menu').classList.contains('hidden')) {
+                        document.getElementById('mobile-menu').classList.remove('hidden');
+                    }
+                }
+            }
+            
+            // Prevent double-tap zoom on touch devices
+            const doubleTapElements = document.querySelectorAll('a, button, input, textarea');
+            doubleTapElements.forEach(el => {
+                if (el.tagName === 'BUTTON' && !el.type) {
+                    el.addEventListener('touchend', e => {
+                        e.preventDefault();
+                        setTimeout(() => el.click(), 0);
+                    });
+                }
+            });
+            
+            // Add better scroll monitoring for mobile
+            let lastScrollTop = 0;
+            const navbar = document.querySelector('nav');
+            
+            window.addEventListener('scroll', () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Hide navbar when scrolling down, show when scrolling up
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    navbar.style.transform = 'translateY(-100%)';
+                    navbar.style.transition = 'transform 0.3s ease-in-out';
+                } else {
+                    navbar.style.transform = 'translateY(0)';
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+        }
         
         // Mobile menu toggle
         document.getElementById('menu-btn').addEventListener('click', function() {
