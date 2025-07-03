@@ -21,10 +21,63 @@
     <meta name="twitter:image" content="profile_pic.jpg">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iIzM5OEJGNiIvPgo8dGV4dCB4PSI1IiB5PSIyMyIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiPk08L3RleHQ+Cjwvc3ZnPgo=">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="profile_pic.jpg" as="image">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mohammad Alnajdawi",
+      "jobTitle": "AI & NLP Engineer",
+      "url": "https://yourwebsite.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/mohammad-alnajdawi-233027173",
+        "https://github.com/Mohamednajdawi"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "TeamViewer"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Linz",
+        "addressRegion": "Upper Austria",
+        "addressCountry": "Austria"
+      },
+      "email": "najdawimohamed@gmail.com",
+      "telephone": "+43 681 84316564",
+      "knowsAbout": ["Artificial Intelligence", "Natural Language Processing", "Machine Learning", "RAG Systems", "Python", "Data Science"]
+    }
+    </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Backup Font Awesome CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" crossorigin="anonymous">
+    <!-- Ensure icons display properly -->
+    <style>
+        .fa, .fab, .fas, .far {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', FontAwesome !important;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+        }
+        .fab {
+            font-family: 'Font Awesome 6 Brands' !important;
+            font-weight: 400;
+        }
+        .fas {
+            font-family: 'Font Awesome 6 Free' !important;
+            font-weight: 900;
+        }
+    </style>
     <style>
         .gradient-text {
             background: linear-gradient(90deg, #3b82f6, #8b5cf6);
@@ -85,6 +138,187 @@
             to { transform: rotate(360deg); }
         }
         
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+            }
+        }
+        
+        .animate-pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .fade-in-left {
+            animation: fadeInLeft 0.8s ease-out;
+        }
+        
+        .fade-in-right {
+            animation: fadeInRight 0.8s ease-out;
+        }
+        
+        /* Enhanced Typography */
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        
+        p {
+            line-height: 1.7;
+        }
+        
+        /* Smooth transitions */
+        * {
+            transition: all 0.3s ease;
+        }
+        
+        /* Interactive Elements */
+        .interactive-card {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .interactive-card:hover {
+            background: linear-gradient(145deg, #ffffff, #f1f5f9);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+        }
+        
+        /* Enhanced Skill Bars */
+        .skill-bar {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #10b981);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Floating Action Button */
+        .floating-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .floating-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.6);
+        }
+        
+        /* Improved Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #3b82f6;
+            border: 2px solid #3b82f6;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-secondary:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
         /* Mobile Responsiveness Improvements */
         @media (max-width: 768px) {
             /* Increase touch target sizes */
@@ -125,6 +359,20 @@
             .touch-active:active {
                 background-color: rgba(59, 130, 246, 0.1);
                 transform: scale(0.98);
+            }
+            
+            /* Mobile-specific animations */
+            .fade-in-up, .fade-in-left, .fade-in-right {
+                animation-duration: 0.5s;
+            }
+            
+            /* Reduce motion for better performance */
+            @media (prefers-reduced-motion: reduce) {
+                *, *::before, *::after {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                }
             }
         }
     </style>
@@ -179,14 +427,14 @@
                     <h2 class="text-2xl md:text-3xl font-semibold mb-8">- <span id="typed" class="border-b-4 border-blue-400"></span></h2>
                     <p class="text-lg mb-8 text-gray-200">AI Engineer with ML/NLP expertise. Specialist in <span class="font-semibold">RAG systems</span> and end-to-end ML solutions. Currently driving AI innovation at TeamViewer.</p>
                     
-                    <!-- Tech badges -->
+            <!-- Tech badges -->
                     <div class="flex flex-wrap gap-3 mb-10">
-                        <span class="bg-blue-800 bg-opacity-30 text-blue-100 text-xs font-medium px-3 py-1 rounded-full border border-blue-400">Python</span>
-                        <span class="bg-blue-800 bg-opacity-30 text-blue-100 text-xs font-medium px-3 py-1 rounded-full border border-blue-400">NLP</span>
-                        <span class="bg-blue-800 bg-opacity-30 text-blue-100 text-xs font-medium px-3 py-1 rounded-full border border-blue-400">ML</span>
-                        <span class="bg-blue-800 bg-opacity-30 text-blue-100 text-xs font-medium px-3 py-1 rounded-full border border-blue-400">RAG</span>
-                        <span class="bg-blue-800 bg-opacity-30 text-blue-100 text-xs font-medium px-3 py-1 rounded-full border border-blue-400">Docker</span>
-                        <span class="bg-blue-800 bg-opacity-30 text-blue-100 text-xs font-medium px-3 py-1 rounded-full border border-blue-400">SQL</span>
+                        <span class="bg-blue-800 bg-opacity-30 text-blue-100 text-xs font-medium px-3 py-1 rounded-full border border-blue-400 hover:bg-blue-700 hover:bg-opacity-50 transition cursor-pointer">Python</span>
+                        <span class="bg-blue-800 bg-opacity-30 text-blue-100 text-xs font-medium px-3 py-1 rounded-full border border-blue-400 hover:bg-blue-700 hover:bg-opacity-50 transition cursor-pointer">NLP</span>
+                        <span class="bg-blue-800 bg-opacity-30 text-blue-100 text-xs font-medium px-3 py-1 rounded-full border border-blue-400 hover:bg-blue-700 hover:bg-opacity-50 transition cursor-pointer">ML</span>
+                        <span class="bg-blue-800 bg-opacity-30 text-blue-100 text-xs font-medium px-3 py-1 rounded-full border border-blue-400 hover:bg-blue-700 hover:bg-opacity-50 transition cursor-pointer">RAG</span>
+                        <span class="bg-blue-800 bg-opacity-30 text-blue-100 text-xs font-medium px-3 py-1 rounded-full border border-blue-400 hover:bg-blue-700 hover:bg-opacity-50 transition cursor-pointer">Docker</span>
+                        <span class="bg-blue-800 bg-opacity-30 text-blue-100 text-xs font-medium px-3 py-1 rounded-full border border-blue-400 hover:bg-blue-700 hover:bg-opacity-50 transition cursor-pointer">SQL</span>
                     </div>
                     
                     <div class="flex space-x-6">
@@ -519,7 +767,7 @@
             
             <div class="grid md:grid-cols-2 gap-10">
                 <!-- Project 1 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover transition duration-300">
+                <div class="interactive-card rounded-lg overflow-hidden">
                     <div class="h-48 bg-blue-600 relative overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="RAG System" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-blue-800 opacity-30"></div>
@@ -539,7 +787,7 @@
                 </div>
                 
                 <!-- Project 2 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover transition duration-300">
+                <div class="interactive-card rounded-lg overflow-hidden">
                     <div class="h-48 bg-purple-600 relative overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80" alt="AI Session Summary" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-purple-800 opacity-30"></div>
@@ -559,7 +807,7 @@
                 </div>
                 
                 <!-- Project 3 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover transition duration-300">
+                <div class="interactive-card rounded-lg overflow-hidden">
                     <div class="h-48 bg-green-600 relative overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1623282033815-40b05d96c903?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="ETL Pipeline" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-green-800 opacity-30"></div>
@@ -579,7 +827,7 @@
                 </div>
                 
                 <!-- Project 4: Quiz App -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover transition duration-300">
+                <div class="interactive-card rounded-lg overflow-hidden">
                     <div class="h-48 bg-indigo-600 relative overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Quiz Generator App" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-indigo-800 opacity-30"></div>
@@ -777,8 +1025,39 @@
         </div>
     </footer>
 
+    <!-- Quick Contact Floating Action Button -->
+    <div class="floating-btn" id="quickContact" title="Quick Contact">
+        <i class="fas fa-comments"></i>
+    </div>
+    
+    <!-- Quick Contact Modal -->
+    <div id="quickContactModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 m-4 max-w-md w-full">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Quick Contact</h3>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <a href="mailto:najdawimohamed@gmail.com" class="btn-primary w-full">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Send Email
+                </a>
+                <a href="tel:+4368184316564" class="btn-secondary w-full">
+                    <i class="fas fa-phone mr-2"></i>
+                    Call Now
+                </a>
+                <a href="https://www.linkedin.com/in/mohammad-alnajdawi-233027173" target="_blank" class="btn-primary w-full" style="background: #0077B5;">
+                    <i class="fab fa-linkedin-in mr-2"></i>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </div>
+    
     <!-- Back to Top Button -->
-    <button id="backToTop" class="fixed bottom-8 right-8 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-blue-700 transition opacity-0 invisible">
+    <button id="backToTop" class="fixed bottom-8 left-8 bg-gray-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-700 transition opacity-0 invisible">
         <i class="fas fa-arrow-up"></i>
     </button>
 
@@ -1015,6 +1294,130 @@
         window.addEventListener('scroll', function() {
             toggleBackToTop();
             animateSkillBars();
+        });
+        
+        // Performance monitoring and analytics
+        (function() {
+            // Track page load performance
+            window.addEventListener('load', function() {
+                const perf = performance.getEntriesByType('navigation')[0];
+                console.log('Page Load Time:', perf.loadEventEnd - perf.loadEventStart + 'ms');
+            });
+            
+            // Track user engagement
+            let engagementStartTime = Date.now();
+            let isUserActive = true;
+            let sectionsViewed = new Set();
+            
+            // Track section views
+            const sections = document.querySelectorAll('section[id]');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        sectionsViewed.add(entry.target.id);
+                        console.log('Section viewed:', entry.target.id);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            sections.forEach(section => observer.observe(section));
+            
+            // Track clicks on important elements
+            document.addEventListener('click', function(e) {
+                const target = e.target.closest('a, button');
+                if (target) {
+                    const elementText = target.textContent.trim();
+                    const elementType = target.tagName.toLowerCase();
+                    const href = target.href || 'N/A';
+                    
+                    console.log('User clicked:', {
+                        element: elementType,
+                        text: elementText,
+                        href: href,
+                        timestamp: new Date().toISOString()
+                    });
+                }
+            });
+            
+            // Track time spent on page
+            window.addEventListener('beforeunload', function() {
+                const timeSpent = Math.round((Date.now() - engagementStartTime) / 1000);
+                console.log('Time spent on page:', timeSpent + ' seconds');
+                console.log('Sections viewed:', Array.from(sectionsViewed));
+            });
+            
+            // Detect user inactivity
+            let inactivityTimer;
+            function resetInactivityTimer() {
+                clearTimeout(inactivityTimer);
+                isUserActive = true;
+                inactivityTimer = setTimeout(() => {
+                    isUserActive = false;
+                    console.log('User inactive');
+                }, 30000); // 30 seconds
+            }
+            
+            ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+                document.addEventListener(event, resetInactivityTimer, true);
+            });
+            
+            resetInactivityTimer();
+        })();
+        
+        // Simple image fade-in when loaded (without lazy loading)
+        (function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                if (img.complete) {
+                    img.style.opacity = '1';
+                } else {
+                    img.style.opacity = '0';
+                    img.style.transition = 'opacity 0.3s';
+                    img.onload = function() {
+                        this.style.opacity = '1';
+                    };
+                }
+            });
+        })();
+        
+        // Enhanced error handling
+        window.addEventListener('error', function(e) {
+            console.error('JavaScript error:', e.error);
+        });
+        
+        window.addEventListener('unhandledrejection', function(e) {
+            console.error('Unhandled promise rejection:', e.reason);
+        });
+        
+        // Quick Contact Modal functionality
+        const quickContactBtn = document.getElementById('quickContact');
+        const quickContactModal = document.getElementById('quickContactModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        
+        quickContactBtn.addEventListener('click', function() {
+            quickContactModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeModalBtn.addEventListener('click', function() {
+            quickContactModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside
+        quickContactModal.addEventListener('click', function(e) {
+            if (e.target === quickContactModal) {
+                quickContactModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !quickContactModal.classList.contains('hidden')) {
+                quickContactModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
         });
     </script>
 </body>
