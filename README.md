@@ -1,100 +1,200 @@
-# Mohammad Alnajdawi - Professional Portfolio Website
+# Mohammad Alnajdawi - Personal Portfolio Website
 
-## 🚀 Recent Improvements
+A professional portfolio website showcasing AI & NLP engineering expertise, now featuring an intelligent AI chatbot assistant.
 
-Your portfolio website has been significantly enhanced with modern features and optimizations. Here's what's been improved:
+## 🤖 New Feature: AI Chatbot Assistant
 
-### 🎨 Visual Enhancements
-- **Custom Animations**: Added fade-in animations and smooth transitions
-- **Interactive Elements**: Enhanced hover effects and micro-interactions
-- **Improved Typography**: Better font weights, line heights, and spacing
-- **Floating Action Button**: Quick access to contact options
-- **Enhanced Button Styles**: Modern gradient buttons with hover effects
+The website now includes an AI-powered chatbot that can answer questions about Mohammad's experience, skills, and projects using OpenAI's GPT model.
 
-### ⚡ Performance Optimizations
-- **SEO Improvements**: Added structured data (JSON-LD) for better search visibility
-- **Meta Tags**: Comprehensive Open Graph and Twitter card support
-- **Resource Preloading**: Critical assets loaded faster
-- **Custom Favicon**: Professional branding with dynamic SVG icon
-- **Image Optimization**: Lazy loading for better performance
+## 🚀 Quick Start
 
-### 🔧 Technical Features
-- **Analytics Integration**: Built-in performance and engagement tracking
-- **Error Handling**: Comprehensive error catching and logging
-- **Mobile Enhancements**: Better touch interactions and swipe gestures
-- **Accessibility**: Improved for screen readers and keyboard navigation
-- **Progressive Enhancement**: Works across all modern browsers
+### Prerequisites
 
-### 📱 Mobile Improvements
-- **Touch Feedback**: Visual feedback for all interactive elements
-- **Swipe Navigation**: Gesture support for mobile menu
-- **Optimized Scrolling**: Smooth scrolling with momentum preservation
-- **Auto-hiding Navbar**: Hides on scroll down, shows on scroll up
-- **Proper Touch Targets**: All buttons meet accessibility guidelines (44px minimum)
+- Node.js (version 16 or higher)
+- npm (Node Package Manager)
+- OpenAI API key
 
-### 🎯 New Interactive Features
-- **Quick Contact Modal**: Instant access to contact methods
-- **Animated Skill Bars**: Visual representation of technical skills
-- **Tech Badge Interactions**: Hover effects on technology tags
-- **Enhanced Project Cards**: Modern card design with better visual hierarchy
+### Installation
 
-### 📊 Analytics & Tracking
-- **Page Performance**: Load time monitoring
-- **User Engagement**: Section view tracking
-- **Click Analytics**: User interaction logging
-- **Time Tracking**: Session duration measurement
-- **Inactivity Detection**: User activity monitoring
+1. **Clone or download this repository**
 
-## 🛠️ Technologies Used
+   ```bash
+   cd personal_website
+   ```
 
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Styling**: Tailwind CSS with custom components
-- **Icons**: Font Awesome 6.4.0
-- **Forms**: Formspree integration for contact form
-- **Analytics**: Custom implementation for user behavior tracking
+2. **Install dependencies**
 
-## 📱 Browser Support
+   ```bash
+   npm install
+   ```
 
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
-- Mobile browsers (iOS Safari, Chrome Mobile)
+3. **Set up environment variables**
 
-## 🚀 Getting Started
+   ```bash
+   # Copy the example environment file
+   cp env.example .env
 
-1. Open `index.html` in any modern web browser
-2. For local development, serve from a local server (e.g., Live Server extension in VS Code)
-3. The website is fully responsive and works on all device sizes
+   # Edit the .env file and add your OpenAI API key
+   # Replace 'your_openai_api_key_here' with your actual API key
+   ```
 
-## 📈 Performance Metrics
+4. **Get your OpenAI API key**
 
-Your website now includes built-in performance monitoring that tracks:
-- Page load times
-- User engagement patterns
-- Section visibility
-- Click-through rates
-- Session duration
+   - Go to [OpenAI API Keys](https://platform.openai.com/api-keys)
+   - Create a new API key
+   - Copy the key to your `.env` file
 
-Check the browser console to see real-time analytics data.
+5. **Start the server**
 
-## 🎨 Customization
+   ```bash
+   # For development (with auto-restart)
+   npm run dev
 
-The website uses CSS custom properties and modular components, making it easy to:
-- Change color schemes
-- Modify animations
-- Add new sections
-- Update content
-- Integrate with analytics platforms
+   # For production
+   npm start
+   ```
 
-## 📞 Contact Integration
+6. **Open your browser**
+   - Navigate to `http://localhost:3000`
+   - The website will load with the chatbot functionality
 
-The floating action button provides quick access to:
-- Direct email (mailto:)
-- Phone calling (tel:)
-- LinkedIn profile
-- Professional contact form
+## 💬 Using the Chatbot
+
+- Click the green robot icon (floating button) to open the chatbot
+- Ask questions about Mohammad's experience, skills, projects, or education
+- The AI assistant has comprehensive knowledge about Mohammad's background
+- Examples of questions you can ask:
+  - "What is Mohammad's experience with NLP?"
+  - "Tell me about his projects"
+  - "What are his technical skills?"
+  - "Where did he study?"
+
+## 🔧 Configuration
+
+### Environment Variables
+
+The following environment variables can be configured in your `.env` file:
+
+| Variable         | Description                    | Default         |
+| ---------------- | ------------------------------ | --------------- |
+| `OPENAI_API_KEY` | Your OpenAI API key (required) | -               |
+| `OPENAI_MODEL`   | OpenAI model to use            | `gpt-3.5-turbo` |
+| `MAX_TOKENS`     | Maximum response length        | `500`           |
+| `TEMPERATURE`    | AI response creativity (0-1)   | `0.7`           |
+| `PORT`           | Server port                    | `3000`          |
+| `NODE_ENV`       | Environment mode               | `development`   |
+
+### Customization
+
+To customize the chatbot's knowledge or behavior:
+
+1. Edit the `SYSTEM_PROMPT` in `server.js`
+2. Modify the chatbot UI in `index.html`
+3. Adjust the styling and colors as needed
+
+## 📁 Project Structure
+
+```
+personal_website/
+├── index.html          # Main website file
+├── server.js           # Backend server with chatbot API
+├── package.json        # Node.js dependencies
+├── env.example         # Environment variables template
+├── profile_pic.jpg     # Profile image
+├── resume.pdf          # Resume file
+└── README.md           # This file
+```
+
+## 🛠 Technology Stack
+
+### Frontend
+
+- HTML5, CSS3, JavaScript
+- Tailwind CSS for styling
+- Font Awesome for icons
+- Responsive design
+
+### Backend
+
+- Node.js with Express.js
+- OpenAI API integration
+- CORS enabled for cross-origin requests
+- Environment-based configuration
+
+### AI Features
+
+- OpenAI GPT-3.5-turbo (configurable)
+- Contextual responses about Mohammad's background
+- Professional conversation handling
+- Error handling and rate limiting
+
+## 🚀 Deployment Options
+
+### Local Development
+
+- Run `npm run dev` for development with auto-restart
+- Access at `http://localhost:3000`
+
+### Production Deployment
+
+#### Option 1: VPS/Server
+
+1. Upload files to your server
+2. Install Node.js and npm
+3. Set up environment variables
+4. Run `npm install && npm start`
+5. Use a process manager like PM2 for production
+
+#### Option 2: Cloud Platforms
+
+- **Heroku**: Add your OpenAI API key in Config Vars
+- **Vercel**: Deploy with serverless functions
+- **Railway**: Direct deployment with environment variables
+- **Netlify**: Use Netlify Functions for the backend
+
+### Environment Variables for Deployment
+
+Make sure to set your `OPENAI_API_KEY` in your deployment platform's environment variables section.
+
+## 💡 Features
+
+### Website Features
+
+- Responsive design for all devices
+- Professional portfolio layout
+- Contact form integration
+- Social media links
+- Download resume functionality
+- SEO optimized
+
+### Chatbot Features
+
+- Real-time AI conversations
+- Professional knowledge base
+- Typing indicators
+- Error handling
+- Mobile-friendly interface
+- Accessible design
+
+## 🔒 Security Notes
+
+- The OpenAI API key is securely stored on the server
+- Frontend never exposes the API key
+- Rate limiting and error handling implemented
+- CORS configured for security
+
+## 📞 Support
+
+For questions about the portfolio or technical implementation:
+
+- Email: najdawimohamed@gmail.com
+- LinkedIn: [Mohammad Alnajdawi](https://www.linkedin.com/in/mohammad-alnajdawi-233027173)
+- GitHub: [Mohamednajdawi](https://github.com/Mohamednajdawi)
+
+## 📝 License
+
+This project is open source and available under the MIT License.
 
 ---
 
-Your professional portfolio is now a modern, high-performance website that showcases your AI and NLP expertise with style and functionality! 🎉
+**Note**: Remember to keep your OpenAI API key secure and never commit it to version control. Always use environment variables for sensitive configuration.
