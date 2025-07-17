@@ -319,8 +319,187 @@
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
         
+        /* Enhanced Chatbot Styles */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #3b82f6, #10b981);
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #2563eb, #059669);
+        }
+        
+        /* Chat Modal Animations */
+        #chatbotModal.show #chatModalContent {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .message-user {
+            animation: slideInRight 0.4s ease-out;
+        }
+        
+        .message-bot {
+            animation: slideInLeft 0.4s ease-out;
+        }
+        
+        /* Enhanced Button Hover Effects */
+        .quick-question:hover {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Typing Animation */
+        .typing-dots {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #6b7280;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            30% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+        
+        /* Message Bubbles */
+        .message-bubble {
+            position: relative;
+            word-wrap: break-word;
+            max-width: 80%;
+        }
+        
+        .message-bubble.user {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border-radius: 18px 18px 4px 18px;
+            margin-left: auto;
+        }
+        
+        .message-bubble.bot {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px 18px 18px 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #6b7280;
+        }
+        
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        
+        .status-online { background-color: #10b981; }
+        .status-busy { background-color: #f59e0b; }
+        .status-offline { background-color: #ef4444; }
+        
+        /* Enhanced Glassmorphism */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        /* Code Syntax Highlighting */
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 8px 0;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+        
         /* Mobile Responsiveness Improvements */
         @media (max-width: 768px) {
+            #chatbotModal .max-w-lg {
+                max-width: 95vw;
+                height: 85vh;
+            }
+            
+            .message-bubble {
+                max-width: 85%;
+            }
+            
             /* Increase touch target sizes */
             nav a, button, .mobile-friendly {
                 min-height: 44px;
@@ -1209,63 +1388,91 @@
         <i class="fas fa-robot"></i>
     </div>
     
-    <!-- Chatbot Modal -->
-    <div id="chatbotModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg w-full max-w-md mx-4 h-96 flex flex-col overflow-hidden shadow-2xl">
-            <!-- Chat Header -->
-            <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 flex justify-between items-center">
-                <div class="flex items-center">
-                    <i class="fas fa-robot mr-2"></i>
-                    <h3 class="text-lg font-semibold">AI Assistant</h3>
+    <!-- Enhanced Chatbot Modal -->
+    <div id="chatbotModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-all duration-300">
+        <div class="bg-white rounded-2xl w-full max-w-lg mx-4 h-[600px] flex flex-col overflow-hidden shadow-2xl transform transition-all duration-300 scale-95 opacity-0" id="chatModalContent">
+            <!-- Enhanced Chat Header -->
+            <div class="bg-gradient-to-r from-blue-600 via-purple-600 to-green-500 text-white p-5 flex justify-between items-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-green-400/20 animate-pulse"></div>
+                <div class="flex items-center relative z-10">
+                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mr-3 animate-pulse-glow">
+                        <i class="fas fa-robot text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold">Mohammad's AI Assistant</h3>
+                        <p class="text-xs opacity-80" id="chatSubtitle">Powered by GPT-4 • Always Learning</p>
+                    </div>
                 </div>
-                <button id="closeChatbot" class="text-white hover:text-gray-200 transition">
+                <button id="closeChatbot" class="text-white/80 hover:text-white transition-all duration-200 p-2 rounded-full hover:bg-white/10">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
             
-            <!-- Chat Messages -->
-            <div id="chatMessages" class="flex-1 p-4 overflow-y-auto bg-gray-50 space-y-3">
-                <div class="flex items-start">
-                    <div class="bg-green-100 p-2 rounded-full mr-2 flex-shrink-0">
-                        <i class="fas fa-robot text-green-600 text-sm"></i>
+            <!-- Enhanced Chat Messages -->
+            <div id="chatMessages" class="flex-1 p-6 overflow-y-auto bg-gradient-to-b from-gray-50 to-white space-y-4 custom-scrollbar">
+                <div class="flex items-start animate-fade-in">
+                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0 shadow-lg">
+                        <i class="fas fa-robot text-white text-sm"></i>
                     </div>
-                    <div class="bg-white p-3 rounded-lg shadow-sm max-w-xs">
-                        <p class="text-sm text-gray-800 mb-2">👋 Hi! I'm Mohammad's AI assistant. I know everything about his AI/NLP expertise!</p>
-                        <p class="text-xs text-gray-600 mb-2">Try asking me:</p>
-                        <div class="space-y-1">
-                            <button class="quick-question w-full text-left text-xs bg-green-50 text-green-700 p-1 rounded hover:bg-green-100 transition" data-question="What's Mohammad's experience with RAG systems?">
-                                💡 RAG systems experience?
+                    <div class="bg-white p-4 rounded-2xl rounded-tl-lg shadow-lg max-w-sm border border-gray-100">
+                        <div class="flex items-center mb-2">
+                            <span class="text-sm font-semibold text-gray-800">Mohammad's AI</span>
+                            <span class="w-2 h-2 bg-green-400 rounded-full ml-2 animate-pulse"></span>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-3 leading-relaxed">
+                            👋 Hey there! I'm Mohammad's AI assistant. I have deep knowledge about his AI/NLP expertise, projects, and career journey.
+                        </p>
+                        <p class="text-xs text-gray-500 mb-3 font-medium">Quick start - try these:</p>
+                        <div class="space-y-2">
+                            <button class="quick-question w-full text-left text-xs bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 p-2.5 rounded-xl hover:from-blue-100 hover:to-blue-200 transition-all duration-200 border border-blue-200/50 transform hover:scale-[1.02]" data-question="What's Mohammad's experience with RAG systems?">
+                                <i class="fas fa-brain mr-2"></i>RAG systems expertise
                             </button>
-                            <button class="quick-question w-full text-left text-xs bg-blue-50 text-blue-700 p-1 rounded hover:bg-blue-100 transition" data-question="Tell me about his current role at TeamViewer">
-                                🏢 Current role at TeamViewer?
+                            <button class="quick-question w-full text-left text-xs bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 p-2.5 rounded-xl hover:from-purple-100 hover:to-purple-200 transition-all duration-200 border border-purple-200/50 transform hover:scale-[1.02]" data-question="Tell me about his current role at TeamViewer">
+                                <i class="fas fa-briefcase mr-2"></i>TeamViewer role
                             </button>
-                            <button class="quick-question w-full text-left text-xs bg-purple-50 text-purple-700 p-1 rounded hover:bg-purple-100 transition" data-question="What are his most impressive projects?">
-                                🚀 Most impressive projects?
+                            <button class="quick-question w-full text-left text-xs bg-gradient-to-r from-green-50 to-green-100 text-green-700 p-2.5 rounded-xl hover:from-green-100 hover:to-green-200 transition-all duration-200 border border-green-200/50 transform hover:scale-[1.02]" data-question="What are his most impressive projects?">
+                                <i class="fas fa-rocket mr-2"></i>Top projects & impact
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Chat Input -->
-            <div class="p-4 border-t bg-white">
-                <div class="flex space-x-2">
-                    <input 
-                        type="text" 
-                        id="chatInput" 
-                        placeholder="Ask me anything..." 
-                        class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500 text-sm"
-                        disabled
-                    >
+            <!-- Enhanced Chat Input -->
+            <div class="p-6 bg-white border-t border-gray-100">
+                <div class="flex space-x-3 items-end">
+                    <div class="flex-1 relative">
+                        <input 
+                            type="text" 
+                            id="chatInput" 
+                            placeholder="Ask me anything about Mohammad..." 
+                            class="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-gray-50 transition-all duration-200 pr-12"
+                            disabled
+                        >
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                            <div id="inputLoader" class="hidden">
+                                <div class="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                            </div>
+                        </div>
+                    </div>
                     <button 
                         id="sendMessage" 
-                        class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="bg-gradient-to-r from-blue-500 to-green-500 text-white p-3 rounded-2xl hover:from-blue-600 hover:to-green-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg transform hover:scale-105"
                         disabled
                     >
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
-                <div id="chatStatus" class="text-xs text-gray-500 mt-2">Connecting to AI assistant...</div>
+                <div class="flex items-center justify-between mt-3">
+                    <div id="chatStatus" class="text-xs text-gray-500 flex items-center">
+                        <div class="w-2 h-2 bg-orange-400 rounded-full mr-2 animate-pulse"></div>
+                        Connecting to AI assistant...
+                    </div>
+                    <div class="text-xs text-gray-400 flex items-center">
+                        <i class="fas fa-shield-alt mr-1"></i>
+                        Secure & Private
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1671,100 +1878,204 @@
         
         let chatbotReady = false;
         
-        // Check if backend is available
+        // Enhanced backend status checking
         async function initializeChatbot() {
+            updateChatStatus('connecting');
+            
             try {
                 const response = await fetch('/api/health');
                 if (response.ok) {
                     chatbotReady = true;
                     chatInput.disabled = false;
                     sendMessageBtn.disabled = false;
-                    chatStatus.textContent = 'Ready to chat!';
-                    chatStatus.classList.remove('text-gray-500');
-                    chatStatus.classList.add('text-green-500');
+                    updateChatStatus('ready');
+                    updateSubtitle('Ready to help • Ask me anything');
                 } else {
                     throw new Error('Backend not available');
                 }
             } catch (error) {
                 chatbotReady = false;
-                chatStatus.textContent = 'AI assistant unavailable. Please try again later.';
-                chatStatus.classList.remove('text-gray-500');
-                chatStatus.classList.add('text-red-500');
+                updateChatStatus('offline');
+                updateSubtitle('Service temporarily unavailable');
+            }
+        }
+        
+        // Update chat status with enhanced indicators
+        function updateChatStatus(status) {
+            const statusElement = document.getElementById('chatStatus');
+            
+            switch(status) {
+                case 'ready':
+                    statusElement.innerHTML = `
+                        <div class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                        AI Assistant is online
+                    `;
+                    statusElement.className = 'text-xs text-green-600 flex items-center';
+                    break;
+                case 'connecting':
+                    statusElement.innerHTML = `
+                        <div class="w-2 h-2 bg-orange-400 rounded-full mr-2 animate-pulse"></div>
+                        Connecting to AI assistant...
+                    `;
+                    statusElement.className = 'text-xs text-orange-500 flex items-center';
+                    break;
+                case 'offline':
+                    statusElement.innerHTML = `
+                        <div class="w-2 h-2 bg-red-400 rounded-full mr-2"></div>
+                        AI assistant unavailable
+                    `;
+                    statusElement.className = 'text-xs text-red-500 flex items-center';
+                    break;
+                case 'thinking':
+                    statusElement.innerHTML = `
+                        <div class="w-2 h-2 bg-blue-400 rounded-full mr-2 animate-pulse"></div>
+                        AI is thinking...
+                    `;
+                    statusElement.className = 'text-xs text-blue-500 flex items-center';
+                    break;
+            }
+        }
+        
+        // Update subtitle in header
+        function updateSubtitle(text) {
+            const subtitle = document.getElementById('chatSubtitle');
+            if (subtitle) {
+                subtitle.textContent = text;
             }
         }
         
         // Initialize chatbot when page loads
         initializeChatbot();
         
-        // Open chatbot modal
-        chatbotBtn.addEventListener('click', function() {
+        // Enhanced modal opening with animation
+        function openChatModal() {
             chatbotModal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            chatInput.focus();
-        });
+            setTimeout(() => {
+                chatbotModal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => chatInput.focus(), 300);
+            }, 10);
+        }
+        
+        // Enhanced modal closing with animation
+        function closeChatModal() {
+            chatbotModal.classList.remove('show');
+            setTimeout(() => {
+                chatbotModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+        
+        // Open chatbot modal
+        chatbotBtn.addEventListener('click', openChatModal);
         
         // Close chatbot modal
-        closeChatbotBtn.addEventListener('click', function() {
-            chatbotModal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        });
+        closeChatbotBtn.addEventListener('click', closeChatModal);
         
         // Close modal when clicking outside
         chatbotModal.addEventListener('click', function(e) {
             if (e.target === chatbotModal) {
-                chatbotModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
+                closeChatModal();
             }
         });
         
-        // Add message to chat
-        function addMessage(content, isUser = false) {
+        // Enhanced message display with modern styling
+        function addMessage(content, isUser = false, timestamp = null) {
             const messageDiv = document.createElement('div');
-            messageDiv.className = `flex items-start ${isUser ? 'justify-end' : ''}`;
+            const currentTime = timestamp || new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            messageDiv.className = `flex items-start mb-4 ${isUser ? 'justify-end message-user' : 'message-bot'}`;
             
             if (isUser) {
                 messageDiv.innerHTML = `
-                    <div class="bg-green-500 text-white p-3 rounded-lg shadow-sm max-w-xs">
-                        <p class="text-sm">${content}</p>
+                    <div class="flex flex-col items-end max-w-xs">
+                        <div class="message-bubble user p-4 shadow-lg">
+                            <p class="text-sm leading-relaxed">${formatMessage(content)}</p>
+                        </div>
+                        <span class="text-xs text-gray-400 mt-1 mr-2">${currentTime}</span>
                     </div>
-                    <div class="bg-green-100 p-2 rounded-full ml-2 flex-shrink-0">
-                        <i class="fas fa-user text-green-600 text-sm"></i>
+                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center ml-3 flex-shrink-0 shadow-lg">
+                        <i class="fas fa-user text-white text-sm"></i>
                     </div>
                 `;
             } else {
                 messageDiv.innerHTML = `
-                    <div class="bg-green-100 p-2 rounded-full mr-2 flex-shrink-0">
-                        <i class="fas fa-robot text-green-600 text-sm"></i>
+                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0 shadow-lg">
+                        <i class="fas fa-robot text-white text-sm"></i>
                     </div>
-                    <div class="bg-white p-3 rounded-lg shadow-sm max-w-xs">
-                        <p class="text-sm text-gray-800">${content}</p>
+                    <div class="flex flex-col max-w-sm">
+                        <div class="flex items-center mb-1">
+                            <span class="text-xs font-semibold text-gray-600">Mohammad's AI</span>
+                            <span class="w-2 h-2 bg-green-400 rounded-full ml-2 animate-pulse"></span>
+                        </div>
+                        <div class="message-bubble bot p-4">
+                            <div class="text-sm text-gray-800 leading-relaxed">${formatMessage(content)}</div>
+                        </div>
+                        <span class="text-xs text-gray-400 mt-1 ml-2">${currentTime}</span>
                     </div>
                 `;
             }
             
             chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            smoothScrollToBottom();
         }
         
-        // Show typing indicator
+        // Format message content (handle markdown, code, etc.)
+        function formatMessage(content) {
+            // Handle code blocks
+            content = content.replace(/```([\s\S]*?)```/g, '<div class="code-block"><pre>$1</pre></div>');
+            
+            // Handle inline code
+            content = content.replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-xs font-mono">$1</code>');
+            
+            // Handle bold text
+            content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Handle links
+            content = content.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-blue-600 hover:underline">$1</a>');
+            
+            // Handle line breaks
+            content = content.replace(/\n/g, '<br>');
+            
+            return content;
+        }
+        
+        // Smooth scroll to bottom
+        function smoothScrollToBottom() {
+            chatMessages.scrollTo({
+                top: chatMessages.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Enhanced typing indicator
         function showTypingIndicator() {
             const typingDiv = document.createElement('div');
-            typingDiv.className = 'flex items-start';
+            typingDiv.className = 'flex items-start mb-4 message-bot';
             typingDiv.id = 'typing-indicator';
             typingDiv.innerHTML = `
-                <div class="bg-green-100 p-2 rounded-full mr-2 flex-shrink-0">
-                    <i class="fas fa-robot text-green-600 text-sm"></i>
+                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0 shadow-lg">
+                    <i class="fas fa-robot text-white text-sm"></i>
                 </div>
-                <div class="bg-white p-3 rounded-lg shadow-sm max-w-xs">
-                    <div class="flex space-x-1">
-                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                <div class="flex flex-col max-w-sm">
+                    <div class="flex items-center mb-1">
+                        <span class="text-xs font-semibold text-gray-600">Mohammad's AI</span>
+                        <span class="w-2 h-2 bg-yellow-400 rounded-full ml-2 animate-pulse"></span>
+                    </div>
+                    <div class="message-bubble bot p-4">
+                        <div class="flex items-center space-x-1">
+                            <span class="text-xs text-gray-500 mr-2">Thinking</span>
+                            <div class="typing-dots">
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
             chatMessages.appendChild(typingDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            smoothScrollToBottom();
         }
         
         // Remove typing indicator
@@ -1775,21 +2086,26 @@
             }
         }
         
-        // Send message to chatbot
+        // Enhanced send message function
         async function sendMessage() {
             const message = chatInput.value.trim();
             if (!message || !chatbotReady) return;
             
-            // Add user message
+            // Add user message with animation
             addMessage(message, true);
             chatInput.value = '';
             
-            // Show typing indicator
+            // Update UI state
+            updateChatStatus('thinking');
             showTypingIndicator();
+            
+            // Show loading in input
+            document.getElementById('inputLoader').classList.remove('hidden');
             
             // Disable input while processing
             chatInput.disabled = true;
             sendMessageBtn.disabled = true;
+            chatInput.placeholder = 'AI is responding...';
             
             try {
                 const response = await fetch('/api/chat', {
@@ -1806,19 +2122,31 @@
                 
                 const data = await response.json();
                 
+                // Simulate realistic response time
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
                 // Remove typing indicator and add bot response
                 removeTypingIndicator();
                 addMessage(data.response);
                 
+                // Update subtitle with response info
+                updateSubtitle('Response generated • Ask another question');
+                
             } catch (error) {
                 console.error('Error sending message:', error);
                 removeTypingIndicator();
-                addMessage('Sorry, I encountered an error. Please try again later.');
+                addMessage('I apologize, but I\'m experiencing technical difficulties. Please try again in a moment or contact Mohammad directly.');
+                updateSubtitle('Connection error • Please try again');
             } finally {
-                // Re-enable input
+                // Re-enable input with enhanced feedback
+                document.getElementById('inputLoader').classList.add('hidden');
                 chatInput.disabled = false;
                 sendMessageBtn.disabled = false;
-                chatInput.focus();
+                chatInput.placeholder = 'Ask me anything about Mohammad...';
+                updateChatStatus('ready');
+                
+                // Auto-focus with delay for better UX
+                setTimeout(() => chatInput.focus(), 200);
             }
         }
         
@@ -1842,38 +2170,42 @@
         });
         
         // Handle banner chatbot button
-        document.getElementById('try-chatbot-btn').addEventListener('click', function() {
-            chatbotModal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            chatInput.focus();
-        });
+        document.getElementById('try-chatbot-btn').addEventListener('click', openChatModal);
         
         // Handle main chatbot button
-        document.getElementById('start-chatbot-btn').addEventListener('click', function() {
-            chatbotModal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            chatInput.focus();
-        });
+        document.getElementById('start-chatbot-btn').addEventListener('click', openChatModal);
         
-        // Handle demo question buttons
+        // Enhanced demo question handlers
         document.addEventListener('click', function(e) {
             if (e.target.closest('.demo-question')) {
                 const button = e.target.closest('.demo-question');
                 const question = button.getAttribute('data-question');
-                chatbotModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-                chatInput.value = question;
+                
+                // Add visual feedback
+                button.style.transform = 'scale(0.98)';
                 setTimeout(() => {
+                    button.style.transform = '';
+                }, 150);
+                
+                openChatModal();
+                setTimeout(() => {
+                    chatInput.value = question;
                     sendMessage();
-                }, 500); // Small delay to let modal open
+                }, 800); // Delay to let modal animation complete
             }
         });
         
-        // Close chatbot with Escape key
+        // Enhanced keyboard shortcuts
         document.addEventListener('keydown', function(e) {
+            // Close chatbot with Escape key
             if (e.key === 'Escape' && !chatbotModal.classList.contains('hidden')) {
-                chatbotModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
+                closeChatModal();
+            }
+            
+            // Open chatbot with Ctrl+K or Cmd+K
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                openChatModal();
             }
         });
     </script>
