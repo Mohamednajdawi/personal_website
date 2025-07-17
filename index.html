@@ -2130,7 +2130,7 @@
             content = content.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
             
             // Handle plain URLs (after markdown links to avoid conflicts)
-            content = content.replace(/(^|[^"])https?:\/\/[^\s<]+/g, '$1<a href="$&" target="_blank" class="text-blue-600 hover:underline">$&</a>');
+            content = content.replace(/(^|[^"])(https?:\/\/[^\s<]+?)([.!?,:;]*(?:\s|$))/g, '$1<a href="$2" target="_blank" class="text-blue-600 hover:underline">$2</a>$3');
             
             // Handle bullet points
             content = content.replace(/^[\-\*]\s+(.+)$/gm, '<div class="flex items-start mb-1"><span class="text-blue-500 mr-2">•</span><span>$1</span></div>');
