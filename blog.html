@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Mohammad Alnajdawi | AI & NLP Engineer</title>
+    <meta name="description" content="Read Mohammad Alnajdawi's insights on AI, Machine Learning, NLP, and software development.">
+    <meta name="keywords" content="AI Blog, Machine Learning Blog, NLP Blog, Software Development, Tech Blog">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com/blog">
+    <meta property="og:title" content="Blog | Mohammad Alnajdawi | AI & NLP Engineer">
+    <meta property="og:description" content="Read Mohammad Alnajdawi's insights on AI, Machine Learning, NLP, and software development.">
+    <meta property="og:image" content="profile_pic.jpg">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog | Mohammad Alnajdawi | AI & NLP Engineer">
+    <meta name="twitter:description" content="Read Mohammad Alnajdawi's insights on AI, Machine Learning, NLP, and software development.">
+    <meta name="twitter:image" content="profile_pic.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iIzM5OEJGNiIvPgo8dGV4dCB4PSI1IiB5PSIyMyIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiPk08L3RleHQ+Cjwvc3ZnPgo=">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #4c1d95 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .blog-card {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .blog-card:hover {
+            background: linear-gradient(145deg, #ffffff, #f1f5f9);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+        }
+        .category-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .category-ai { background: #dbeafe; color: #1e40af; }
+        .category-ml { background: #dcfce7; color: #166534; }
+        .category-web { background: #fef3c7; color: #92400e; }
+        .category-data { background: #e0e7ff; color: #3730a3; }
+        .category-tutorial { background: #fce7f3; color: #be185d; }
+        
+        .search-highlight {
+            background: #fef08a;
+            padding: 0.1rem 0.2rem;
+            border-radius: 0.25rem;
+        }
+        
+        /* Blog content styles */
+        .blog-content {
+            line-height: 1.7;
+        }
+        .blog-content h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .blog-content h2 { font-size: 2rem; font-weight: 600; margin: 2rem 0 1rem 0; }
+        .blog-content h3 { font-size: 1.5rem; font-weight: 600; margin: 1.5rem 0 1rem 0; }
+        .blog-content p { margin-bottom: 1rem; }
+        .blog-content ul, .blog-content ol { margin: 1rem 0; padding-left: 2rem; }
+        .blog-content li { margin-bottom: 0.5rem; }
+        .blog-content pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        .blog-content code {
+            background: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+        }
+        .blog-content pre code {
+            background: transparent;
+            padding: 0;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid #3b82f6;
+            background: #f8fafc;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+        }
+        .blog-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        .blog-content a {
+            color: #3b82f6;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: all 0.2s;
+        }
+        .blog-content a:hover {
+            text-decoration-color: #3b82f6;
+        }
+        
+        /* Reading progress bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            z-index: 9999;
+            transition: width 0.3s ease;
+        }
+    </style>
+    
+    <!-- Progressive Web App -->
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Mohammad Alnajdawi Blog">
+    <link rel="manifest" href="/manifest.json">
+</head>
+<body class="font-sans antialiased text-gray-800 bg-gray-50">
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="reading-progress"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl font-bold gradient-text">Mohammad Alnajdawi</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 transition">Home</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 transition">About</a>
+                    <a href="index.html#experience" class="text-gray-700 hover:text-blue-600 transition">Experience</a>
+                    <a href="index.html#skills" class="text-gray-700 hover:text-blue-600 transition">Skills</a>
+                    <a href="index.html#projects" class="text-gray-700 hover:text-blue-600 transition">Projects</a>
+                    <a href="blog.html" class="text-blue-600 font-medium">Blog</a>
+                    <a href="index.html#contact" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-gray-700 p-2 rounded-md">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 px-4 shadow-lg">
+            <a href="index.html" class="block py-3 px-2 text-gray-700 hover:text-blue-600 transition rounded-md">Home</a>
+            <a href="index.html#about" class="block py-3 px-2 text-gray-700 hover:text-blue-600 transition rounded-md">About</a>
+            <a href="index.html#experience" class="block py-3 px-2 text-gray-700 hover:text-blue-600 transition rounded-md">Experience</a>
+            <a href="index.html#skills" class="block py-3 px-2 text-gray-700 hover:text-blue-600 transition rounded-md">Skills</a>
+            <a href="index.html#projects" class="block py-3 px-2 text-gray-700 hover:text-blue-600 transition rounded-md">Projects</a>
+            <a href="blog.html" class="block py-3 px-2 text-blue-600 font-medium rounded-md">Blog</a>
+            <a href="index.html#contact" class="block bg-blue-600 text-white px-4 py-3 rounded-md hover:bg-blue-700 transition text-center mt-3">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Blog Hero Section -->
+    <section class="hero-gradient pt-32 pb-20 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                    My <span class="gradient-text">Tech Blog</span>
+                </h1>
+                <p class="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
+                    Insights, tutorials, and thoughts on AI, Machine Learning, NLP, and software development
+                </p>
+                
+                <!-- Blog Stats -->
+                <div class="flex justify-center space-x-8 mb-10">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-300" id="total-posts">0</div>
+                        <div class="text-sm text-gray-300">Posts</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-purple-300" id="total-categories">5</div>
+                        <div class="text-sm text-gray-300">Categories</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-green-300">2024</div>
+                        <div class="text-sm text-gray-300">Since</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row gap-6 items-center justify-between">
+                <!-- Search Bar -->
+                <div class="relative flex-1 max-w-md">
+                    <input
+                        type="text"
+                        id="search-input" 
+                        placeholder="Search blog posts..."
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    >
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                
+                <!-- Category Filter -->
+                <div class="flex flex-wrap gap-2">
+                    <button class="category-filter active category-tag bg-blue-100 text-blue-800" data-category="all">
+                        All Posts
+                    </button>
+                    <button class="category-filter category-tag category-ai" data-category="ai">
+                        <i class="fas fa-brain mr-1"></i> AI
+                    </button>
+                    <button class="category-filter category-tag category-ml" data-category="ml">
+                        <i class="fas fa-robot mr-1"></i> ML
+                    </button>
+                    <button class="category-filter category-tag category-web" data-category="web">
+                        <i class="fas fa-code mr-1"></i> Web Dev
+                    </button>
+                    <button class="category-filter category-tag category-data" data-category="data">
+                        <i class="fas fa-database mr-1"></i> Data
+                    </button>
+                    <button class="category-filter category-tag category-tutorial" data-category="tutorial">
+                        <i class="fas fa-graduation-cap mr-1"></i> Tutorial
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Featured Post -->
+            <div id="featured-post" class="mb-16 hidden">
+                <h2 class="text-2xl font-bold mb-8 flex items-center">
+                    <i class="fas fa-star text-yellow-500 mr-3"></i>
+                    Featured Post
+                </h2>
+                <div id="featured-post-content"></div>
+            </div>
+            
+            <!-- Blog Posts Grid -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-8">
+                    Latest Posts
+                    <span class="text-sm font-normal text-gray-500 ml-2" id="posts-count">(0 posts)</span>
+                </h2>
+            </div>
+            
+            <div id="blog-posts-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog posts will be loaded here -->
+            </div>
+            
+            <!-- No Results Message -->
+            <div id="no-results" class="hidden text-center py-16">
+                <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-xl font-semibold text-gray-600 mb-2">No posts found</h3>
+                <p class="text-gray-500">Try adjusting your search terms or category filters.</p>
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-12">
+                <button id="load-more" class="hidden bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-medium">
+                    <i class="fas fa-plus mr-2"></i>
+                    Load More Posts
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-8">
+                <i class="fas fa-envelope text-4xl mb-4 opacity-80"></i>
+                <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+                <p class="text-xl text-blue-100">Get notified when I publish new posts about AI, ML, and tech</p>
+            </div>
+            
+            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                    class="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white focus:outline-none"
+                    required
+                >
+                <button
+                    type="submit"
+                    class="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition"
+                >
+                    Subscribe
+                </button>
+            </form>
+            
+            <p class="text-sm text-blue-200 mt-4">
+                No spam, unsubscribe at any time.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:justify-between">
+                <div class="mb-8 md:mb-0">
+                    <a href="index.html" class="text-xl font-bold gradient-text">Mohammad Alnajdawi</a>
+                    <p class="mt-4 text-gray-400">AI & NLP Engineer passionate about sharing knowledge and insights.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                            <li><a href="index.html#about" class="text-gray-400 hover:text-white transition">About</a></li>
+                            <li><a href="index.html#projects" class="text-gray-400 hover:text-white transition">Projects</a></li>
+                            <li><a href="blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                            <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">Categories</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Artificial Intelligence</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Machine Learning</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Web Development</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Data Science</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">Connect</h3>
+                        <div class="flex space-x-4">
+                            <a href="https://www.linkedin.com/in/mohammad-alnajdawi-233027173" target="_blank" class="text-gray-400 hover:text-white transition">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/Mohamednajdawi" target="_blank" class="text-gray-400 hover:text-white transition">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                        <p class="mt-4 text-gray-400">najdawimohamed@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-800">
+                <p class="text-center text-gray-400 text-sm">
+                    &copy; <span id="year"></span> Mohammad Alnajdawi. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Blog Post Modal -->
+    <div id="blog-modal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl w-full max-w-4xl mx-4 max-h-[90vh] overflow-hidden shadow-2xl">
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h2 id="modal-title" class="text-2xl font-bold text-gray-900"></h2>
+                <button id="close-modal" class="text-gray-400 hover:text-gray-600 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="modal-content" class="p-6 overflow-y-auto max-h-[70vh] blog-content">
+                <!-- Blog post content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Blog posts configuration - matches files in blog_posts directory
+        const blogPosts = [
+            {
+                id: 'session-activity-recorder',
+                title: 'Building a Chrome Extension for Session Activity Recording',
+                excerpt: 'A comprehensive guide to building a Chrome extension that records user activity, integrates with databases, and provides AI-powered insights.',
+                category: 'web',
+                tags: ['Chrome Extension', 'JavaScript', 'Database', 'AI'],
+                date: '2024-07-24',
+                readTime: '8 min read',
+                author: 'Mohammad Alnajdawi',
+                featured: true,
+                file: 'blog_posts/session-activity-recorder.md'
+            },
+            {
+                id: 'rag-systems-guide',
+                title: 'Building Production-Ready RAG Systems',
+                excerpt: 'A deep dive into Retrieval-Augmented Generation systems, from basic concepts to enterprise-level implementations.',
+                category: 'ai',
+                tags: ['RAG', 'LLM', 'Vector Database', 'AI'],
+                date: '2024-07-20',
+                readTime: '12 min read',
+                author: 'Mohammad Alnajdawi',
+                featured: false,
+                file: 'blog_posts/rag-systems-guide.md'
+            },
+            {
+                id: 'ml-pipeline-automation',
+                title: 'Automating ML Pipelines with Docker and CI/CD',
+                excerpt: 'How to build robust, automated machine learning pipelines that can scale from development to production.',
+                category: 'ml',
+                tags: ['MLOps', 'Docker', 'CI/CD', 'Automation'],
+                date: '2024-07-15',
+                readTime: '10 min read',
+                author: 'Mohammad Alnajdawi',
+                featured: false,
+                file: 'blog_posts/ml-pipeline-automation.md'
+            }
+        ];
+
+        // Global variables
+        let filteredPosts = [...blogPosts];
+        let currentCategory = 'all';
+        let currentSearchTerm = '';
+        let postsPerPage = 6;
+        let currentPage = 1;
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePage();
+            setupEventListeners();
+        });
+
+        function initializePage() {
+            updateBlogStats();
+            renderBlogPosts();
+            updatePostsCount();
+            
+            // Set current year
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+            // Setup reading progress for modal
+            setupReadingProgress();
+        }
+
+        function setupEventListeners() {
+            // Mobile menu toggle
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuBtn?.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('search-input');
+            let searchTimeout;
+            
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    currentSearchTerm = e.target.value.toLowerCase();
+                    filterPosts();
+                }, 300);
+            });
+
+            // Category filters
+            document.querySelectorAll('.category-filter').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    document.querySelectorAll('.category-filter').forEach(btn => {
+                        btn.classList.remove('active', 'bg-blue-100', 'text-blue-800');
+                    });
+                    
+                    e.target.classList.add('active', 'bg-blue-100', 'text-blue-800');
+                    currentCategory = e.target.dataset.category;
+                    filterPosts();
+                });
+            });
+
+            // Modal functionality
+            const modal = document.getElementById('blog-modal');
+            const closeModal = document.getElementById('close-modal');
+            
+            closeModal.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }
+            });
+
+            // Newsletter form
+            const newsletter = document.querySelector('form');
+            newsletter?.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thanks for subscribing! Newsletter functionality coming soon.');
+            });
+        }
+
+        function updateBlogStats() {
+            document.getElementById('total-posts').textContent = blogPosts.length;
+        }
+
+        function filterPosts() {
+            filteredPosts = blogPosts.filter(post => {
+                const matchesCategory = currentCategory === 'all' || post.category === currentCategory;
+                const matchesSearch = currentSearchTerm === '' || 
+                    post.title.toLowerCase().includes(currentSearchTerm) ||
+                    post.excerpt.toLowerCase().includes(currentSearchTerm) ||
+                    post.tags.some(tag => tag.toLowerCase().includes(currentSearchTerm));
+                
+                return matchesCategory && matchesSearch;
+            });
+            
+            currentPage = 1;
+            renderBlogPosts();
+            updatePostsCount();
+        }
+
+        function renderBlogPosts() {
+            const grid = document.getElementById('blog-posts-grid');
+            const noResults = document.getElementById('no-results');
+            
+            if (filteredPosts.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+            
+            noResults.classList.add('hidden');
+            
+            const postsToShow = filteredPosts.slice(0, currentPage * postsPerPage);
+            
+            grid.innerHTML = postsToShow.map(post => `
+                <article class="blog-card rounded-lg overflow-hidden cursor-pointer" onclick="openBlogPost('${post.id}')">
+                    <div class="h-48 bg-gradient-to-r ${getCategoryGradient(post.category)} flex items-center justify-center">
+                        <i class="fas ${getCategoryIcon(post.category)} text-6xl text-white opacity-80"></i>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="category-tag category-${post.category}">
+                                <i class="fas ${getCategoryIcon(post.category)} mr-1"></i>
+                                ${post.category.toUpperCase()}
+                            </span>
+                            <span class="text-sm text-gray-500">${formatDate(post.date)}</span>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 line-clamp-2">${highlightSearch(post.title)}</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-3">${highlightSearch(post.excerpt)}</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                ${post.readTime}
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-1">
+                                ${post.tags.slice(0, 2).map(tag => `
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                                        ${tag}
+                                    </span>
+                                `).join('')}
+                                ${post.tags.length > 2 ? `<span class="text-xs text-gray-400">+${post.tags.length - 2}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+            
+            // Show/hide load more button
+            const loadMoreBtn = document.getElementById('load-more');
+            if (postsToShow.length < filteredPosts.length) {
+                loadMoreBtn.classList.remove('hidden');
+                loadMoreBtn.onclick = loadMorePosts;
+            } else {
+                loadMoreBtn.classList.add('hidden');
+            }
+        }
+
+        function loadMorePosts() {
+            currentPage++;
+            renderBlogPosts();
+        }
+
+        async function openBlogPost(postId) {
+            const post = blogPosts.find(p => p.id === postId);
+            if (!post) return;
+            
+            const modal = document.getElementById('blog-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            
+            modalTitle.textContent = post.title;
+            
+            // Show loading state
+            modalContent.innerHTML = `
+                <div class="flex items-center justify-center py-12">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                    <span class="ml-3 text-gray-600">Loading post...</span>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            
+            try {
+                // Load markdown content from file
+                const response = await fetch(post.file);
+                if (!response.ok) {
+                    throw new Error('Failed to load blog post');
+                }
+                
+                const markdownContent = await response.text();
+                
+                // Parse markdown to HTML
+                modalContent.innerHTML = marked.parse(markdownContent);
+                
+                // Add syntax highlighting
+                modalContent.querySelectorAll('pre code').forEach((block) => {
+                    Prism.highlightElement(block);
+                });
+                
+            } catch (error) {
+                console.error('Error loading blog post:', error);
+                modalContent.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Failed to Load Post</h3>
+                        <p class="text-gray-600 mb-4">Sorry, there was an error loading this blog post.</p>
+                        <button onclick="location.reload()" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
+                            Try Again
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function updatePostsCount() {
+            document.getElementById('posts-count').textContent = `(${filteredPosts.length} posts)`;
+        }
+
+        function highlightSearch(text) {
+            if (!currentSearchTerm) return text;
+            
+            const regex = new RegExp(`(${escapeRegExp(currentSearchTerm)})`, 'gi');
+            return text.replace(regex, '<span class="search-highlight">$1</span>');
+        }
+
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+
+        function getCategoryGradient(category) {
+            const gradients = {
+                ai: 'from-blue-500 to-blue-600',
+                ml: 'from-green-500 to-green-600', 
+                web: 'from-yellow-500 to-orange-500',
+                data: 'from-purple-500 to-indigo-600',
+                tutorial: 'from-pink-500 to-rose-600'
+            };
+            return gradients[category] || 'from-gray-500 to-gray-600';
+        }
+
+        function getCategoryIcon(category) {
+            const icons = {
+                ai: 'fa-brain',
+                ml: 'fa-robot',
+                web: 'fa-code',
+                data: 'fa-database',
+                tutorial: 'fa-graduation-cap'
+            };
+            return icons[category] || 'fa-file-alt';
+        }
+
+        function setupReadingProgress() {
+            const progressBar = document.getElementById('reading-progress');
+            
+            // This would be used when viewing individual blog posts
+            window.addEventListener('scroll', () => {
+                const modalContent = document.getElementById('modal-content');
+                if (!modalContent || document.getElementById('blog-modal').classList.contains('hidden')) {
+                    progressBar.style.width = '0%';
+                    return;
+                }
+                
+                const scrolled = modalContent.scrollTop;
+                const maxScroll = modalContent.scrollHeight - modalContent.clientHeight;
+                const progress = (scrolled / maxScroll) * 100;
+                
+                progressBar.style.width = Math.min(progress, 100) + '%';
+            });
+        }
+    </script>
+</body>
+</html>
