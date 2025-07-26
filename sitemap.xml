@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+    <!-- Homepage -->
+    <url>
+        <loc>https://mohammad-alnajdawi.com/</loc>
+        <lastmod>2024-07-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Blog page -->
+    <url>
+        <loc>https://mohammad-alnajdawi.com/blog.html</loc>
+        <lastmod>2024-07-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- About section -->
+    <url>
+        <loc>https://mohammad-alnajdawi.com/#about</loc>
+        <lastmod>2024-07-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Experience section -->
+    <url>
+        <loc>https://mohammad-alnajdawi.com/#experience</loc>
+        <lastmod>2024-07-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Skills section -->
+    <url>
+        <loc>https://mohammad-alnajdawi.com/#skills</loc>
+        <lastmod>2024-07-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Projects section -->
+    <url>
+        <loc>https://mohammad-alnajdawi.com/#projects</loc>
+        <lastmod>2024-07-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Publications section -->
+    <url>
+        <loc>https://mohammad-alnajdawi.com/#publications</loc>
+        <lastmod>2024-07-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Contact section -->
+    <url>
+        <loc>https://mohammad-alnajdawi.com/#contact</loc>
+        <lastmod>2024-07-26</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+</urlset>
