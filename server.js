@@ -6,9 +6,58 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Security middleware
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+
+// Apply security headers
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://cdn.tailwindcss.com", "https://cdnjs.cloudflare.com", "https://use.fontawesome.com"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.tailwindcss.com"],
+            imgSrc: ["'self'", "data:", "https:"],
+            fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com", "https://use.fontawesome.com"],
+            connectSrc: ["'self'", "https://api.openai.com"],
+            frameSrc: ["'none'"],
+            objectSrc: ["'none'"],
+            upgradeInsecureRequests: []
+        }
+    },
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
+
+// Rate limiting
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: 'Too many requests from this IP, please try again later.',
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
+// Apply rate limiting to all requests
+app.use(limiter);
+
+// Specific rate limiting for chat API
+const chatLimiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 10, // limit each IP to 10 chat requests per minute
+    message: 'Too many chat requests, please wait a moment.',
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors({
+    origin: process.env.NODE_ENV === 'production' 
+        ? ['https://www.mohammadalnajdawi.xyz', 'https://mohammadalnajdawi.xyz']
+        : true,
+    credentials: true
+}));
+app.use(express.json({ limit: '1mb' }));
 app.use(express.static('.'));
 
 // OpenAI configuration
@@ -87,14 +136,22 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: 'Chatbot service is running' });
 });
 
-// Chat endpoint
-app.post('/api/chat', async (req, res) => {
+// Chat endpoint with rate limiting
+app.post('/api/chat', chatLimiter, async (req, res) => {
     try {
         const { message } = req.body;
         
         if (!message) {
             return res.status(400).json({ error: 'Message is required' });
         }
+
+        // Input sanitization and validation
+        if (typeof message !== 'string' || message.length > 1000) {
+            return res.status(400).json({ error: 'Invalid message format or too long' });
+        }
+
+        // Basic XSS protection - remove potentially dangerous characters
+        const sanitizedMessage = message.replace(/[<>]/g, '');
 
         if (!process.env.OPENAI_API_KEY) {
             return res.status(503).json({ 
@@ -110,10 +167,10 @@ app.post('/api/chat', async (req, res) => {
 
         // Call OpenAI API
         const completion = await openai.chat.completions.create({
-            model: process.env.OPENAI_MODEL || 'gpt-3.5-turbo',
+            model: process.env.OPENAI_MODEL || 'gpt-4.1-mini-2025-04-14',
             messages: [
                 { role: 'system', content: SYSTEM_PROMPT },
-                { role: 'user', content: message }
+                { role: 'user', content: sanitizedMessage }
             ],
             max_tokens: parseInt(process.env.MAX_TOKENS) || 500,
             temperature: parseFloat(process.env.TEMPERATURE) || 0.7,
