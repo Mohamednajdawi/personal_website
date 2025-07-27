@@ -99,8 +99,11 @@ personal_website/
 ├── server.js           # Backend server with chatbot API
 ├── package.json        # Node.js dependencies
 ├── env.example         # Environment variables template
-├── profile_pic.jpg     # Profile image
-├── resume.pdf          # Resume file
+├── assets/
+│   ├── css/           # Stylesheets
+│   ├── images/        # Images
+│   ├── blog-posts/    # Blog post markdown files
+│   └── resume.pdf     # Resume file
 └── README.md           # This file
 ```
 

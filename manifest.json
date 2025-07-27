@@ -54,7 +54,7 @@
   ],
   "screenshots": [
     {
-      "src": "profile_pic.jpg",
+      		"src": "assets/images/profile_pic.jpg",
       "sizes": "1280x720",
       "type": "image/jpeg",
       "form_factor": "wide",

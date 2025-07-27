@@ -2,7 +2,7 @@ const CACHE_NAME = "mohammad-portfolio-v1";
 const urlsToCache = [
   "/",
   "/index.html",
-  "/profile_pic.jpg",
+  	"/assets/images/profile_pic.jpg",
   "https://cdn.tailwindcss.com",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
 ];
