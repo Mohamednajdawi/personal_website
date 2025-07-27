@@ -39,7 +39,6 @@ The website now includes an AI-powered chatbot that can answer questions about M
    ```
 
 4. **Get your OpenAI API key**
-
    - Go to [OpenAI API Keys](https://platform.openai.com/api-keys)
    - Create a new API key
    - Copy the key to your `.env` file
