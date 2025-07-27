@@ -7,15 +7,19 @@ const envSchema = Joi.object({
     .default("development"),
   PORT: Joi.number().default(3000),
   OPENAI_API_KEY: Joi.string()
-    .required()
-    .description("OpenAI API key is required"),
+    .when('NODE_ENV', {
+      is: 'production',
+      then: Joi.required(),
+      otherwise: Joi.optional()
+    })
+    .description("OpenAI API key is required in production"),
   OPENAI_MODEL: Joi.string().default("gpt-4.1-mini-2025-04-14"),
   MAX_TOKENS: Joi.number().default(500),
   TEMPERATURE: Joi.number().min(0).max(2).default(0.7),
   ALLOWED_ORIGINS: Joi.string()
     .default("https://www.mohammadalnajdawi.xyz,https://mohammadalnajdawi.xyz")
     .description("Comma-separated list of allowed CORS origins"),
-});
+}).unknown(); // Allow unknown properties
 
 const { error, value: envVars } = envSchema.validate(process.env);
 

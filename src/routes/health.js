@@ -20,6 +20,7 @@ router.get(
       openai: {
         configured: !!config.openai.apiKey,
         model: config.openai.model,
+        status: config.openai.apiKey ? 'ready' : 'development_mode'
       },
     };
 
@@ -48,6 +49,7 @@ router.get(
         model: config.openai.model,
         maxTokens: config.openai.maxTokens,
         temperature: config.openai.temperature,
+        status: config.openai.apiKey ? 'ready' : 'development_mode'
       },
       cors: {
         allowedOrigins: config.cors.allowedOrigins,

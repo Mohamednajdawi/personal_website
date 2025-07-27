@@ -7,10 +7,13 @@ const config = require("../config/environment");
 
 const router = express.Router();
 
-// Initialize OpenAI client
-const openai = new OpenAI({
-  apiKey: config.openai.apiKey,
-});
+// Initialize OpenAI client only if API key is provided
+let openai = null;
+if (config.openai.apiKey) {
+    openai = new OpenAI({
+        apiKey: config.openai.apiKey,
+    });
+}
 
 // System prompt (moved to external config)
 const SYSTEM_PROMPT = `You are an AI assistant representing Mohammad Alnajdawi, an AI & NLP Engineer. Here's what you should know about him:
@@ -79,6 +82,18 @@ router.post(
       ip: req.ip,
       userAgent: req.get("User-Agent"),
     });
+
+    // Check if OpenAI is configured
+    if (!openai) {
+        logger.warn('OpenAI not configured - returning mock response', {
+            environment: config.env,
+            ip: req.ip
+        });
+        
+        return res.json({ 
+            response: "Hello! I'm Mohammad's AI assistant. The chatbot is currently in development mode. Please add your OpenAI API key to enable full functionality. You can ask me about Mohammad's background, skills, and experience, and I'll provide a helpful response based on his portfolio information."
+        });
+    }
 
     try {
       // Call OpenAI API
