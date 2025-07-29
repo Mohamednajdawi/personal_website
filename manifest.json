@@ -7,7 +7,11 @@
   "background_color": "#ffffff",
   "theme_color": "#3b82f6",
   "orientation": "portrait-primary",
-  "categories": ["portfolio", "professional", "technology"],
+  "categories": [
+    "portfolio",
+    "professional",
+    "technology"
+  ],
   "lang": "en",
   "dir": "ltr",
   "icons": [
@@ -54,7 +58,7 @@
   ],
   "screenshots": [
     {
-      		"src": "assets/images/profile_pic.jpg",
+      "src": "assets/images/mohammad_alnajdawi.jpg",
       "sizes": "1280x720",
       "type": "image/jpeg",
       "form_factor": "wide",
