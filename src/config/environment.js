@@ -19,6 +19,12 @@ const envSchema = Joi.object({
   ALLOWED_ORIGINS: Joi.string()
     .default("http://localhost:3000,https://www.mohammadalnajdawi.xyz,https://mohammadalnajdawi.xyz")
     .description("Comma-separated list of allowed CORS origins"),
+  TELEGRAM_BOT_TOKEN: Joi.string()
+    .optional()
+    .description("Telegram bot token for contact form"),
+  TELEGRAM_CHAT_ID: Joi.string()
+    .optional()
+    .description("Your personal Telegram chat ID to receive messages"),
 }).unknown(); // Allow unknown properties
 
 const { error, value: envVars } = envSchema.validate(process.env);
@@ -40,5 +46,9 @@ module.exports = {
     allowedOrigins: envVars.ALLOWED_ORIGINS.split(",").map((origin) =>
       origin.trim(),
     ),
+  },
+  telegram: {
+    botToken: envVars.TELEGRAM_BOT_TOKEN,
+    chatId: envVars.TELEGRAM_CHAT_ID,
   },
 };

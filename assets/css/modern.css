@@ -982,6 +982,96 @@ body {
   min-height: 120px;
 }
 
+/* Contact Options */
+.contact-options {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.telegram-quick-contact,
+.contact-form-section {
+  text-align: center;
+}
+
+.telegram-quick-contact h3,
+.contact-form-section h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.telegram-quick-contact p,
+.contact-form-section p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.telegram-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1.05rem;
+  padding: 1rem 2rem;
+}
+
+.telegram-btn i {
+  font-size: 1.25rem;
+}
+
+.contact-divider {
+  position: relative;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.contact-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border);
+}
+
+.contact-divider span {
+  position: relative;
+  background: var(--bg-card);
+  padding: 0 1rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.contact-form-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-feedback {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.form-feedback.success {
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--primary);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.form-feedback.error {
+  background: rgba(255, 100, 100, 0.1);
+  color: #ff6464;
+  border: 1px solid rgba(255, 100, 100, 0.3);
+}
+
 /* ===== FOOTER ===== */
 .footer {
   padding: 3rem 0;

@@ -13,6 +13,7 @@ const {
 } = require("./src/middleware/errorHandler");
 const chatRoutes = require("./src/routes/chat");
 const healthRoutes = require("./src/routes/health");
+const telegramRoutes = require("./src/routes/telegram");
 
 const app = express();
 
@@ -102,6 +103,7 @@ app.use((req, res, next) => {
 // Routes
 app.use("/api", chatRoutes);
 app.use("/api", healthRoutes);
+app.use("/api", telegramRoutes);
 
 // Serve the main HTML file
 app.get("/", (req, res) => {
