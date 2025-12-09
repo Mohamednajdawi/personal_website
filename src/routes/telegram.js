@@ -60,15 +60,16 @@ router.post(
     try {
       // Format message for Telegram
       const telegramMessage = `
-🔔 *New Contact Message from Portfolio*
+*NEW CONTACT MESSAGE*
+━━━━━━━━━━━━━━━━━━━━
 
-👤 *Name:* ${name}
-📧 *Email:* ${email}
+*Name:* ${name}
+*Email:* ${email}
 
-💬 *Message:*
+*Message:*
 ${message}
 
----
+━━━━━━━━━━━━━━━━━━━━
 _Sent from: mohammad-alnajdawi.com_
 `;
 
