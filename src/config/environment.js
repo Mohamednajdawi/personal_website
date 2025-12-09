@@ -17,7 +17,7 @@ const envSchema = Joi.object({
   MAX_TOKENS: Joi.number().default(500),
   TEMPERATURE: Joi.number().min(0).max(2).default(0.7),
   ALLOWED_ORIGINS: Joi.string()
-    .default("https://www.mohammadalnajdawi.xyz,https://mohammadalnajdawi.xyz")
+    .default("http://localhost:3000,https://www.mohammadalnajdawi.xyz,https://mohammadalnajdawi.xyz")
     .description("Comma-separated list of allowed CORS origins"),
 }).unknown(); // Allow unknown properties
 

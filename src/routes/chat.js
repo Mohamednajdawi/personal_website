@@ -51,11 +51,31 @@ TECHNICAL SKILLS:
 - Frameworks: Scikit-learn, Spacy, NLTK, LangChain
 - Specialties: ETL/ELT Processes, Vector Databases, Transformers
 
-PROJECTS:
+FEATURED PROJECTS:
+1. Progrezz (https://progrezz.at/):
+   - AI-powered study assistant for generating quizzes, flashcards, and essays
+   - Features intelligent feedback loop that learns from mistakes
+   - Adaptive learning system that focuses on weak points
+   - Technologies: AI Agents, RAG, Feedback Loop, EdTech
+
+2. NORMO - Baurecht Assistent (https://app.normo.at/):
+   - AI-powered construction law assistant for Austrian building regulations
+   - Multi-agent AI system for intelligent legal guidance
+   - Document analysis using advanced NLP
+   - Technologies: AI Agents, LegalTech, NLP, Multi-Agent Systems
+
+3. AIKA (http://aika.at/):
+   - Advanced RAG system with precise document citation capabilities
+   - Expansion RAG architecture for enhanced accuracy
+   - Exact document source referencing for traceability
+   - Technologies: RAG, Citations, Vector DB, LLMs
+
+OTHER PROJECTS:
 - Legal Intelligence RAG System for Arcture (improved search by 40%)
 - AI Session Summarizer (reduced support team analysis time by 60%)
 - Medical Data ETL Pipeline
-- AI Quiz Generator Web App
+- Production ML Pipeline Automation with MLOps
+- Session Activity Recorder with Computer Vision
 
 PUBLICATIONS:
 - "Generating Actionable Insights from Patient Medical Records and Structured Clinical Knowledge" (2024)

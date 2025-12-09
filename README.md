@@ -1,6 +1,13 @@
 # Mohammad Alnajdawi - Personal Portfolio Website
 
-A professional portfolio website showcasing AI & NLP engineering expertise, now featuring an intelligent AI chatbot assistant.
+🎨 **NEW**: Modern redesign with dark theme, neon accents, and smooth animations inspired by [yasio.dev](https://yasio.dev/)
+
+A professional portfolio website showcasing AI & NLP engineering expertise, featuring:
+- ✨ Modern developer-focused design with code aesthetics
+- 🤖 Intelligent AI chatbot assistant powered by OpenAI
+- 📝 Technical blog with markdown support
+- 🎯 Interactive project showcase
+- 🌐 Fully responsive and mobile-optimized
 
 ## 🤖 New Feature: AI Chatbot Assistant
 
@@ -55,7 +62,8 @@ The website now includes an AI-powered chatbot that can answer questions about M
 
 6. **Open your browser**
    - Navigate to `http://localhost:3000`
-   - The website will load with the chatbot functionality
+   - The website will load with the modern design and chatbot functionality
+   - Enjoy the glitch loading animation and smooth scroll effects!
 
 ## 💬 Using the Chatbot
 
@@ -95,26 +103,56 @@ To customize the chatbot's knowledge or behavior:
 
 ```
 personal_website/
-├── index.html          # Main website file
-├── server.js           # Backend server with chatbot API
-├── package.json        # Node.js dependencies
-├── env.example         # Environment variables template
+├── index.html              # Main homepage (modern design)
+├── blog.html               # Blog listing page
+├── server.js               # Backend server with chatbot API
+├── package.json            # Node.js dependencies
+├── env.example             # Environment variables template
+├── DESIGN_NOTES.md         # Design documentation and inspiration
 ├── assets/
-│   ├── css/           # Stylesheets
-│   ├── images/        # Images
-│   ├── blog-posts/    # Blog post markdown files
-│   └── resume.pdf     # Resume file
-└── README.md           # This file
+│   ├── css/
+│   │   ├── modern.css      # Main modern design styles ✨ NEW
+│   │   ├── blog.css        # Blog-specific styles ✨ NEW
+│   │   ├── main.css        # Legacy styles
+│   │   └── components.css  # Component styles
+│   ├── images/
+│   │   └── mohammad_alnajdawi.jpg
+│   ├── blog-posts/         # Markdown blog posts
+│   │   ├── rag-systems-guide.md
+│   │   ├── ml-pipeline-automation.md
+│   │   └── session-activity-recorder.md
+│   └── resume.pdf
+└── README.md               # This file
 ```
+
+## 🎨 Design
+
+This website features a **modern, developer-focused design** inspired by [yasio.dev](https://yasio.dev/):
+
+### Key Design Elements
+- 🌑 **Dark Theme**: Black background with neon green (#00ff88) accents
+- 💻 **Code Aesthetics**: Terminal prompts, code blocks, and developer styling
+- ✨ **Smooth Animations**: Glitch effects, floating orbs, scroll-triggered animations
+- 🎯 **Interactive Elements**: Hover effects, card transformations, smooth transitions
+- 📱 **Responsive**: Optimized for all screen sizes
+
+### Typography
+- **Body**: Inter (Modern sans-serif)
+- **Code**: Fira Code (Monospace with ligatures)
+
+For detailed design documentation, see [DESIGN_NOTES.md](DESIGN_NOTES.md)
 
 ## 🛠 Technology Stack
 
 ### Frontend
 
-- HTML5, CSS3, JavaScript
-- Tailwind CSS for styling
+- HTML5, CSS3, JavaScript (Vanilla JS - no frameworks)
+- Modern CSS (Grid, Flexbox, Custom Properties)
+- Intersection Observer API for animations
 - Font Awesome for icons
-- Responsive design
+- Google Fonts (Inter, Fira Code)
+- Marked.js for Markdown parsing
+- Prism.js for syntax highlighting
 
 ### Backend
 
@@ -122,6 +160,8 @@ personal_website/
 - OpenAI API integration
 - CORS enabled for cross-origin requests
 - Environment-based configuration
+- Helmet for security
+- Winston for logging
 
 ### AI Features
 
@@ -160,23 +200,31 @@ Make sure to set your `OPENAI_API_KEY` in your deployment platform's environment
 
 ## 💡 Features
 
+### Design Features
+
+- 🌑 **Dark Theme**: Modern dark design with neon green (#00ff88) accents
+- ✨ **Animations**: Glitch effects, floating orbs, smooth transitions
+- 💻 **Code Aesthetics**: Terminal-style elements and syntax-highlighted sections
+- 📱 **Responsive**: Mobile-first design with optimized layouts
+- 🎯 **Interactive**: Hover effects, scroll animations, and smooth navigation
+
 ### Website Features
 
-- Responsive design for all devices
-- Professional portfolio layout
-- Contact form integration
-- Social media links
-- Download resume functionality
-- SEO optimized
+- **Hero Section**: Animated introduction with rotating skills showcase
+- **Timeline**: Visual work experience timeline with technology tags
+- **Projects**: Card-based project showcase with direct blog links
+- **About**: Code-style presentation (JavaScript class format)
+- **Contact**: Dual-layout with contact methods and form
+- **Blog**: Modern article cards with modal-based full reading experience
+- **SEO Optimized**: Meta tags, structured data, sitemap
 
 ### Chatbot Features
 
-- Real-time AI conversations
-- Professional knowledge base
-- Typing indicators
-- Error handling
-- Mobile-friendly interface
-- Accessible design
+- 🤖 Real-time AI conversations powered by OpenAI
+- 💬 Professional knowledge base about Mohammad's experience
+- ⚡ Typing indicators and smooth animations
+- 📱 Mobile-friendly slide-up interface
+- ♿ Accessible design with keyboard navigation
 
 ## 🔒 Security Notes
 
@@ -192,6 +240,19 @@ For questions about the portfolio or technical implementation:
 - Email: najdawimohamed@gmail.com
 - LinkedIn: [Mohammad Alnajdawi](https://www.linkedin.com/in/mohammad-alnajdawi-233027173)
 - GitHub: [Mohamednajdawi](https://github.com/Mohamednajdawi)
+
+## 🎨 Design Credits
+
+The modern design of this website is inspired by [yasio.dev](https://yasio.dev/) by Jan Baszczok. 
+
+Key inspirations:
+- Dark theme with neon accent colors
+- Terminal and code-style aesthetics
+- Section naming convention with "/>" suffix
+- Smooth animations and transitions
+- Developer-focused presentation style
+
+The implementation has been customized and extended with unique features for Mohammad's portfolio.
 
 ## 📝 License
 
