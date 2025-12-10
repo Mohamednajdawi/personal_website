@@ -159,6 +159,39 @@
         border-radius: 0.5rem;
         border: 2px solid var(--border);
         filter: brightness(0.9) contrast(1.2) saturate(0.8);
+        position: relative;
+        z-index: 1;
+        cursor: grab;
+      }
+
+      #map:active {
+        cursor: grabbing;
+      }
+
+      /* Fix Leaflet container issues */
+      .leaflet-container {
+        background: #1a1a1a;
+      }
+
+      .leaflet-control-zoom {
+        border: 1px solid var(--primary) !important;
+        background: var(--bg-card) !important;
+      }
+
+      .leaflet-control-zoom a {
+        background: var(--bg-dark) !important;
+        color: var(--primary) !important;
+        border: 1px solid var(--border) !important;
+      }
+
+      .leaflet-control-zoom a:hover {
+        background: var(--primary) !important;
+        color: var(--bg-dark) !important;
+      }
+
+      .zoom-message {
+        margin-top: 60px;
+        margin-left: 10px;
       }
 
       .visitors-list {
@@ -361,14 +394,63 @@
 
       // Initialize map with neon dark theme
       function initMap() {
-        map = L.map('map').setView([20, 0], 2);
-        
-        // Use dark map tiles
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-          subdomains: 'abcd',
-          maxZoom: 19
-        }).addTo(map);
+        try {
+          map = L.map('map', {
+            scrollWheelZoom: false, // Disable scroll zoom initially
+            zoomControl: true,
+            attributionControl: true
+          }).setView([20, 0], 2);
+          
+          // Use dark map tiles
+          L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+          }).addTo(map);
+
+          // Enable scroll zoom when user clicks on map
+          map.on('click', function() {
+            map.scrollWheelZoom.enable();
+            const msg = document.querySelector('.zoom-message');
+            if (msg) msg.style.display = 'none';
+          });
+          
+          // Disable scroll zoom when mouse leaves map
+          map.getContainer().addEventListener('mouseleave', function() {
+            map.scrollWheelZoom.disable();
+          });
+
+          // Fix map display issues
+          setTimeout(() => {
+            map.invalidateSize();
+          }, 250);
+
+          // Prevent page scroll when interacting with map
+          map.getContainer().addEventListener('wheel', function(e) {
+            if (map.scrollWheelZoom.enabled()) {
+              e.stopPropagation();
+            }
+          });
+
+          // Add message to click map to enable zoom
+          const zoomMessage = L.control({ position: 'topleft' });
+          zoomMessage.onAdd = function() {
+            const div = L.DomUtil.create('div', 'zoom-message');
+            div.innerHTML = '<small style="background: rgba(0,0,0,0.8); padding: 5px 10px; border-radius: 4px; color: #00ff88; font-family: \'Fira Code\', monospace; font-size: 0.7rem;">Click map + scroll to zoom</small>';
+            div.style.pointerEvents = 'none';
+            return div;
+          };
+          zoomMessage.addTo(map);
+
+          // Hide message after 3 seconds
+          setTimeout(() => {
+            const msg = document.querySelector('.zoom-message');
+            if (msg) msg.style.display = 'none';
+          }, 3000);
+
+        } catch (error) {
+          console.error('Error initializing map:', error);
+        }
       }
 
       // Custom marker icon with neon glow
@@ -499,6 +581,17 @@
         
         // Auto-refresh every 30 seconds
         setInterval(loadAnalytics, 30000);
+      });
+
+      // Handle window resize to fix map display
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (map) {
+            map.invalidateSize();
+          }
+        }, 250);
       });
     </script>
   </body>
