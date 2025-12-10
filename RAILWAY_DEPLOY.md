@@ -73,7 +73,23 @@ TELEGRAM_CHAT_ID=2087735245
 NODE_ENV=production
 PORT=3000
 ALLOWED_ORIGINS=https://your-railway-domain.up.railway.app
+ANALYTICS_PATH=/app/data
 ```
+
+### Step 3.5: Configure Volume for Analytics (IMPORTANT!)
+
+To persist visitor analytics data across deployments:
+
+1. Go to your Railway service dashboard
+2. Click on the **"Settings"** tab
+3. Scroll down to **"Volumes"** section
+4. Click **"+ New Volume"**
+5. Configure:
+   - **Mount Path**: `/app/data`
+   - **Size**: 1 GB (more than enough for analytics)
+6. Click **"Add"**
+
+This ensures your visitor tracking data persists even when Railway redeploys your app!
 
 ### Step 4: Deploy Settings
 

@@ -11,9 +11,11 @@ const {
   errorHandler,
   notFoundHandler,
 } = require("./src/middleware/errorHandler");
+const { trackVisitor } = require("./src/middleware/analytics");
 const chatRoutes = require("./src/routes/chat");
 const healthRoutes = require("./src/routes/health");
 const telegramRoutes = require("./src/routes/telegram");
+const analyticsRoutes = require("./src/routes/analytics");
 
 const app = express();
 
@@ -38,6 +40,7 @@ app.use(
           "https://cdn.tailwindcss.com",
           "https://cdn.jsdelivr.net",
           "https://cdnjs.cloudflare.com",
+          "https://unpkg.com",
         ],
         imgSrc: ["'self'", "data:", "https:"],
         fontSrc: [
@@ -47,7 +50,13 @@ app.use(
           "https://cdnjs.cloudflare.com",
           "https://use.fontawesome.com",
         ],
-        connectSrc: ["'self'", "https://api.openai.com"],
+        connectSrc: [
+          "'self'",
+          "https://api.openai.com",
+          "https://ipapi.co",
+          "https://*.tile.openstreetmap.org",
+          "https://*.basemaps.cartocdn.com",
+        ],
         frameSrc: ["'none'"],
         objectSrc: ["'none'"],
         upgradeInsecureRequests: [],
@@ -100,10 +109,14 @@ app.use((req, res, next) => {
   next();
 });
 
+// Analytics tracking middleware (tracks all page visits)
+app.use(trackVisitor);
+
 // Routes
 app.use("/api", chatRoutes);
 app.use("/api", healthRoutes);
 app.use("/api", telegramRoutes);
+app.use(analyticsRoutes);
 
 // Serve the main HTML file
 app.get("/", (req, res) => {
@@ -113,6 +126,11 @@ app.get("/", (req, res) => {
 // Serve blog page
 app.get("/blog", (req, res) => {
   res.sendFile(path.join(__dirname, "blog.html"));
+});
+
+// Serve analytics dashboard
+app.get("/analytics", (req, res) => {
+  res.sendFile(path.join(__dirname, "analytics.html"));
 });
 
 // 404 handler

@@ -58,3 +58,6 @@ temp/
 # Logs
 logs/
 *.log 
+# Analytics data
+data/
+*.json
