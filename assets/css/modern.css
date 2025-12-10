@@ -341,11 +341,13 @@ body {
   color: var(--text-secondary);
   margin-bottom: 1rem;
   font-size: 1.1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
 }
 
 .prompt {
   color: var(--primary);
-  margin-right: 0.5rem;
 }
 
 .type-text {
@@ -385,7 +387,7 @@ body {
   position: relative;
   height: 1em;
   width: auto;
-  min-width: clamp(180px, 20vw, 280px);
+  min-width: clamp(260px, 30vw, 420px);
   vertical-align: baseline;
 }
 
@@ -694,6 +696,33 @@ body {
   font-family: 'Fira Code', monospace;
 }
 
+.project-status-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.05em;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.project-status-badge.production {
+  background: rgba(0, 255, 136, 0.2);
+  color: var(--primary);
+  border: 1px solid rgba(0, 255, 136, 0.4);
+}
+
+.project-status-badge.internal {
+  background: rgba(139, 92, 246, 0.2);
+  color: #a78bfa;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+}
+
 .project-icon {
   font-size: 2.5rem;
   color: var(--primary);
@@ -714,6 +743,7 @@ body {
   line-height: 1.6;
   position: relative;
   z-index: 1;
+  flex-grow: 1;
 }
 
 .project-tags {
@@ -723,6 +753,69 @@ body {
   margin-bottom: 1.5rem;
   position: relative;
   z-index: 1;
+}
+
+.project-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+}
+
+.project-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95rem;
+  border: 2px solid transparent;
+}
+
+.project-link-btn.primary {
+  background: var(--primary);
+  color: var(--bg-dark);
+  box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+}
+
+.project-link-btn.primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+}
+
+.project-link-btn.secondary {
+  background: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.project-link-btn.secondary:hover {
+  background: rgba(0, 255, 136, 0.1);
+  transform: translateY(-2px);
+}
+
+.project-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-family: 'Fira Code', monospace;
+  padding: 0.5rem 0;
+  justify-content: center;
+}
+
+.project-note i {
+  font-size: 0.75rem;
+  color: var(--text-muted);
 }
 
 .project-link {
@@ -1424,7 +1517,7 @@ body {
   .rotating-text {
     display: block;
     margin-top: 0.5rem;
-    min-width: 200px;
+    min-width: 240px;
   }
 
   .hero-cta {
@@ -1472,6 +1565,16 @@ body {
 
   .projects-grid {
     grid-template-columns: 1fr;
+  }
+
+  .project-status-badge {
+    font-size: 0.65rem;
+    padding: 0.35rem 0.6rem;
+  }
+
+  .project-link-btn {
+    font-size: 0.9rem;
+    padding: 0.75rem 1.25rem;
   }
 
   .code-content {
