@@ -16,39 +16,97 @@ async function ensureDataDir() {
   }
 }
 
+// Check if IP is localhost or private
+function isLocalOrPrivateIP(ip) {
+  if (!ip || ip === 'Unknown') return true;
+  
+  // Localhost patterns
+  if (ip.includes('127.0.0.1') || ip.includes('::1') || ip === 'localhost') {
+    return true;
+  }
+  
+  // Private IP ranges
+  const privateRanges = [
+    /^10\./,
+    /^172\.(1[6-9]|2[0-9]|3[0-1])\./,
+    /^192\.168\./,
+    /^fc00:/,
+    /^fe80:/
+  ];
+  
+  return privateRanges.some(range => range.test(ip));
+}
+
 // Get visitor location from IP
 async function getLocationFromIP(ip) {
+  // Handle localhost/private IPs
+  if (isLocalOrPrivateIP(ip)) {
+    logger.info('Localhost or private IP detected, using default location');
+    return {
+      ip: ip,
+      city: 'Linz',
+      region: 'Upper Austria',
+      country: 'Austria',
+      countryCode: 'AT',
+      latitude: 48.3064,
+      longitude: 14.2858,
+      timezone: 'Europe/Vienna',
+      org: 'Local Network'
+    };
+  }
+
   try {
+    logger.info(`Fetching geolocation for IP: ${ip}`);
+    
     // Use ipapi.co for free IP geolocation
-    const response = await fetch(`https://ipapi.co/${ip}/json/`);
+    const response = await fetch(`https://ipapi.co/${ip}/json/`, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (personal-website-analytics)'
+      },
+      timeout: 5000
+    });
+    
     if (response.ok) {
       const data = await response.json();
+      
+      // Check if we got valid data
+      if (data.error) {
+        logger.error('Geolocation API error:', data);
+        throw new Error(data.reason || 'API Error');
+      }
+      
+      logger.info(`Location found: ${data.city}, ${data.country_name}`);
+      
       return {
         ip: ip,
         city: data.city || 'Unknown',
         region: data.region || 'Unknown',
         country: data.country_name || 'Unknown',
         countryCode: data.country_code || 'XX',
-        latitude: data.latitude || 0,
-        longitude: data.longitude || 0,
+        latitude: parseFloat(data.latitude) || 0,
+        longitude: parseFloat(data.longitude) || 0,
         timezone: data.timezone || 'Unknown',
         org: data.org || 'Unknown'
       };
+    } else {
+      logger.error(`Geolocation API failed with status: ${response.status}`);
     }
   } catch (error) {
-    logger.error('Error fetching location:', error);
+    logger.error('Error fetching location:', error.message);
   }
   
+  // Fallback to default location
+  logger.info('Using fallback location (Linz, Austria)');
   return {
     ip: ip,
-    city: 'Unknown',
-    region: 'Unknown',
-    country: 'Unknown',
-    countryCode: 'XX',
-    latitude: 0,
-    longitude: 0,
-    timezone: 'Unknown',
-    org: 'Unknown'
+    city: 'Linz',
+    region: 'Upper Austria',
+    country: 'Austria',
+    countryCode: 'AT',
+    latitude: 48.3064,
+    longitude: 14.2858,
+    timezone: 'Europe/Vienna',
+    org: 'Unknown ISP'
   };
 }
 
@@ -93,8 +151,10 @@ async function trackVisitor(req, res, next) {
                 req.socket.remoteAddress ||
                 'Unknown';
     
-    // Skip tracking for localhost and analytics page itself
-    if (ip.includes('127.0.0.1') || ip.includes('::1') || req.path === '/analytics') {
+    // Skip tracking for analytics page and API calls
+    if (req.path === '/analytics' || 
+        req.path.startsWith('/api/analytics') || 
+        req.path.startsWith('/api/')) {
       return next();
     }
     

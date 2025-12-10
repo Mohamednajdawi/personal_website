@@ -463,21 +463,33 @@
       // Add marker to map
       function addMarker(visit) {
         const { location } = visit;
-        if (location.latitude && location.longitude && location.latitude !== 0) {
-          const marker = L.marker([location.latitude, location.longitude], { icon: neonIcon })
-            .addTo(map);
-          
-          const popupContent = `
-            <div class="popup-content">
-              <div class="popup-location">${location.city}, ${location.country}</div>
-              <div class="popup-detail"><i class="fas fa-map-marker-alt"></i> ${location.region}</div>
-              <div class="popup-detail"><i class="fas fa-clock"></i> ${new Date(visit.timestamp).toLocaleString()}</div>
-              <div class="popup-detail"><i class="fas fa-network-wired"></i> ${location.org}</div>
-            </div>
-          `;
-          
-          marker.bindPopup(popupContent);
-          markers.push(marker);
+        
+        // Only add marker if we have valid coordinates
+        const lat = parseFloat(location.latitude);
+        const lon = parseFloat(location.longitude);
+        
+        if (!isNaN(lat) && !isNaN(lon) && lat !== 0 && lon !== 0) {
+          try {
+            const marker = L.marker([lat, lon], { icon: neonIcon })
+              .addTo(map);
+            
+            const popupContent = `
+              <div class="popup-content">
+                <div class="popup-location">${location.city || 'Unknown'}, ${location.country || 'Unknown'}</div>
+                <div class="popup-detail"><i class="fas fa-map-marker-alt"></i> ${location.region || 'Unknown'}</div>
+                <div class="popup-detail"><i class="fas fa-clock"></i> ${new Date(visit.timestamp).toLocaleString()}</div>
+                <div class="popup-detail"><i class="fas fa-network-wired"></i> ${location.org || 'Unknown'}</div>
+                <div class="popup-detail"><i class="fas fa-globe"></i> IP: ${visit.ip}</div>
+              </div>
+            `;
+            
+            marker.bindPopup(popupContent);
+            markers.push(marker);
+          } catch (error) {
+            console.error('Error adding marker:', error);
+          }
+        } else {
+          console.warn('Invalid coordinates for visit:', visit);
         }
       }
 
@@ -527,35 +539,50 @@
         const container = document.getElementById('visitorsList');
         
         if (visits.length === 0) {
-          container.innerHTML = '<div class="loading">No visitors yet</div>';
+          container.innerHTML = '<div class="loading">No visitors yet. Visit your homepage to see tracking in action!</div>';
           return;
         }
         
-        container.innerHTML = visits.map(visit => `
-          <div class="visitor-item">
-            <div class="visitor-header">
-              <div class="visitor-location">
-                <i class="fas fa-map-marker-alt"></i>
-                ${visit.location.city}, ${visit.location.country}
+        container.innerHTML = visits.map(visit => {
+          const location = visit.location || {};
+          const city = location.city || 'Unknown';
+          const country = location.country || 'Unknown';
+          const region = location.region || 'Unknown';
+          const isLocal = visit.ip.includes('127.0.0.1') || visit.ip.includes('::1') || city === 'Linz';
+          
+          return `
+            <div class="visitor-item">
+              <div class="visitor-header">
+                <div class="visitor-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  ${city}, ${country}
+                  ${isLocal ? '<span style="color: var(--text-muted); font-size: 0.8rem; margin-left: 0.5rem;">(Local/Test)</span>' : ''}
+                </div>
+                <div class="visitor-time">${formatTime(visit.timestamp)}</div>
               </div>
-              <div class="visitor-time">${formatTime(visit.timestamp)}</div>
+              <div class="visitor-details">
+                <div class="detail-item">
+                  <i class="fas fa-globe"></i>
+                  <span>${region}</span>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-network-wired"></i>
+                  <span>${visit.ip}</span>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-link"></i>
+                  <span>${visit.page}</span>
+                </div>
+                ${visit.referrer && visit.referrer !== 'Direct' ? `
+                <div class="detail-item">
+                  <i class="fas fa-external-link-alt"></i>
+                  <span>${visit.referrer}</span>
+                </div>
+                ` : ''}
+              </div>
             </div>
-            <div class="visitor-details">
-              <div class="detail-item">
-                <i class="fas fa-globe"></i>
-                <span>${visit.location.region}</span>
-              </div>
-              <div class="detail-item">
-                <i class="fas fa-network-wired"></i>
-                <span>${visit.ip}</span>
-              </div>
-              <div class="detail-item">
-                <i class="fas fa-link"></i>
-                <span>${visit.page}</span>
-              </div>
-            </div>
-          </div>
-        `).join('');
+          `;
+        }).join('');
       }
 
       // Format timestamp
