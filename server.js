@@ -19,6 +19,9 @@ const analyticsRoutes = require("./src/routes/analytics");
 
 const app = express();
 
+// Trust proxy - required for Railway and other hosting platforms
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(
   helmet({

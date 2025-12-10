@@ -151,10 +151,8 @@ async function trackVisitor(req, res, next) {
                 req.socket.remoteAddress ||
                 'Unknown';
     
-    // Skip tracking for analytics page and API calls
-    if (req.path === '/analytics' || 
-        req.path.startsWith('/api/analytics') || 
-        req.path.startsWith('/api/')) {
+    // Only track main page visits
+    if (req.path !== '/' && req.path !== '/index.html') {
       return next();
     }
     

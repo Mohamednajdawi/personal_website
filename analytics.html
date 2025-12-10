@@ -224,6 +224,65 @@
         margin-left: 10px;
       }
 
+      /* Custom marker styling */
+      .custom-marker {
+        z-index: 1000 !important;
+        position: relative !important;
+        pointer-events: auto !important;
+      }
+
+      .custom-marker > div {
+        animation: markerPulse 2s ease-in-out infinite;
+      }
+
+      @keyframes markerPulse {
+        0%, 100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.9;
+        }
+      }
+
+      .leaflet-marker-pane {
+        z-index: 600 !important;
+      }
+
+      .leaflet-marker-icon {
+        z-index: 1000 !important;
+      }
+
+      /* Ensure markers are always visible */
+      .leaflet-pane {
+        z-index: auto;
+      }
+
+      .leaflet-tile-pane {
+        z-index: 200;
+      }
+
+      .leaflet-overlay-pane {
+        z-index: 400;
+      }
+
+      .leaflet-shadow-pane {
+        z-index: 500;
+      }
+
+      .leaflet-marker-pane {
+        z-index: 600 !important;
+      }
+
+      .leaflet-tooltip-pane {
+        z-index: 650;
+      }
+
+      .leaflet-popup-pane {
+        z-index: 700;
+      }
+
       .visitors-list {
         background: var(--bg-card);
         border: 1px solid var(--border);
@@ -523,8 +582,22 @@
       // Custom marker icon with neon glow
       const neonIcon = L.divIcon({
         className: 'custom-marker',
-        html: '<div style="width: 20px; height: 20px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 20px rgba(0, 255, 136, 0.8), 0 0 40px rgba(0, 255, 136, 0.4);"></div>',
-        iconSize: [20, 20]
+        html: `
+          <div style="
+            width: 24px; 
+            height: 24px; 
+            background: #00ff88; 
+            border-radius: 50%; 
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.8), 0 0 40px rgba(0, 255, 136, 0.4); 
+            position: absolute;
+            z-index: 1000;
+            border: 2px solid #00ff88;
+            cursor: pointer;
+          "></div>
+        `,
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+        popupAnchor: [0, -12]
       });
 
       // Add marker to map
@@ -537,8 +610,12 @@
         
         if (!isNaN(lat) && !isNaN(lon) && lat !== 0 && lon !== 0) {
           try {
-            const marker = L.marker([lat, lon], { icon: neonIcon })
-              .addTo(map);
+            const marker = L.marker([lat, lon], { 
+              icon: neonIcon,
+              zIndexOffset: 1000,
+              riseOnHover: true,
+              riseOffset: 250
+            }).addTo(map);
             
             const popupContent = `
               <div class="popup-content">
@@ -552,6 +629,9 @@
             
             marker.bindPopup(popupContent);
             markers.push(marker);
+            
+            // Force marker to render properly
+            marker.update();
           } catch (error) {
             console.error('Error adding marker:', error);
           }
@@ -586,10 +666,16 @@
             new Date(v.timestamp).toDateString() === today
           ).length;
           document.getElementById('today').textContent = todayVisits;
-          
-          // Clear and add markers
+
+          // Clear and add markers with slight delay to ensure map is ready
           clearMarkers();
-          data.visits.forEach(visit => addMarker(visit));
+          setTimeout(() => {
+            data.visits.forEach(visit => addMarker(visit));
+            // Force map update after adding markers
+            if (map) {
+              map.invalidateSize({ pan: false });
+            }
+          }, 300);
           
           // Display recent visitors
           displayVisitors(data.visits.slice(-50).reverse());
