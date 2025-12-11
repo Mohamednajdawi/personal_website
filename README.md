@@ -9,9 +9,18 @@ A professional portfolio website showcasing AI & NLP engineering expertise, feat
 - 🎯 Interactive project showcase
 - 🌐 Fully responsive and mobile-optimized
 
-## 🤖 New Feature: AI Chatbot Assistant
+## 🤖 New Feature: AI Chatbot Assistant with Streaming ✨
 
-The website now includes an AI-powered chatbot that can answer questions about Mohammad's experience, skills, and projects using OpenAI's GPT model.
+The website now includes an **AI-powered chatbot with real-time streaming responses**! Watch as the AI types out answers with a cool cyberpunk-themed typewriter effect.
+
+### Features:
+- 🌊 **Real-time Streaming**: Responses appear character-by-character as they're generated
+- ⚡ **Instant Feedback**: No more waiting for complete responses
+- 💚 **Cool Effects**: Blinking terminal cursor with neon green glow
+- 🎨 **Cyberpunk Theme**: Matches the website's aesthetic perfectly
+- 🤖 **Smart Assistant**: Answers questions about Mohammad's experience, skills, and projects
+
+For detailed information about the streaming implementation, see [STREAMING_CHATBOT.md](STREAMING_CHATBOT.md).
 
 ## 🚀 Quick Start
 
@@ -108,7 +117,11 @@ personal_website/
 ├── server.js               # Backend server with chatbot API
 ├── package.json            # Node.js dependencies
 ├── env.example             # Environment variables template
-├── DESIGN_NOTES.md         # Design documentation and inspiration
+├── .eslintrc.js            # ESLint configuration ✨ NEW
+├── .prettierrc             # Prettier configuration ✨ NEW
+├── sw.js                   # Service worker for PWA
+├── DESIGN_NOTES.md         # Design documentation
+├── STREAMING_CHATBOT.md    # Streaming feature docs ✨ NEW
 ├── assets/
 │   ├── css/
 │   │   ├── modern.css      # Main modern design styles ✨ NEW
@@ -220,11 +233,13 @@ Make sure to set your `OPENAI_API_KEY` in your deployment platform's environment
 
 ### Chatbot Features
 
-- 🤖 Real-time AI conversations powered by OpenAI
-- 💬 Professional knowledge base about Mohammad's experience
-- ⚡ Typing indicators and smooth animations
-- 📱 Mobile-friendly slide-up interface
-- ♿ Accessible design with keyboard navigation
+- 🌊 **Streaming Responses**: Real-time character-by-character streaming
+- 💚 **Typewriter Effect**: Cool terminal-style cursor with glow
+- 🤖 **Smart AI**: Powered by OpenAI with comprehensive knowledge
+- ⚡ **Instant Feedback**: No waiting for complete responses
+- 🎨 **Theme Integration**: Matches cyberpunk aesthetic
+- 📱 **Mobile-friendly**: Optimized slide-up interface
+- ♿ **Accessible**: Keyboard navigation support
 
 ## 🔒 Security Notes
 
