@@ -836,16 +836,77 @@
             body: JSON.stringify({ message })
           });
 
-          const data = await response.json();
           typingIndicator.remove();
 
-          if (data.response) {
-            addMessage(data.response, 'bot');
-          } else if (data.error) {
-            addMessage(data.error, 'bot');
-          } else {
+          if (!response.ok) {
             addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+            return;
           }
+
+          // Handle streaming response
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          let botMessageDiv = null;
+          let botMessageContent = null;
+          let fullText = '';
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value, { stream: true });
+            const lines = chunk.split('\n');
+
+            for (const line of lines) {
+              if (line.startsWith('data: ')) {
+                const data = line.slice(6);
+                
+                if (data === '[DONE]') {
+                  // Remove streaming cursor
+                  if (botMessageContent) {
+                    botMessageContent.classList.remove('streaming');
+                  }
+                  continue;
+                }
+
+                try {
+                  const parsed = JSON.parse(data);
+                  
+                  if (parsed.error) {
+                    if (!botMessageDiv) {
+                      addMessage(parsed.error, 'bot');
+                    }
+                    continue;
+                  }
+
+                  if (parsed.content) {
+                    // Create message div if it doesn't exist
+                    if (!botMessageDiv) {
+                      botMessageDiv = document.createElement('div');
+                      botMessageDiv.className = 'message bot-message';
+                      botMessageDiv.innerHTML = '<div class="message-content streaming"><p></p></div>';
+                      chatbotMessages.appendChild(botMessageDiv);
+                      botMessageContent = botMessageDiv.querySelector('.message-content');
+                    }
+
+                    // Append content with typewriter effect
+                    fullText += parsed.content;
+                    const paragraph = botMessageContent.querySelector('p');
+                    paragraph.textContent = fullText;
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                  }
+                } catch (e) {
+                  // Skip invalid JSON
+                }
+              }
+            }
+          }
+
+          // Ensure cursor is removed at the end
+          if (botMessageContent) {
+            botMessageContent.classList.remove('streaming');
+          }
+
         } catch (error) {
           typingIndicator.remove();
           addMessage('Sorry, I\'m having trouble connecting. Please try again later.', 'bot');

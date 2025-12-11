@@ -90,7 +90,7 @@ LANGUAGES:
 
 Answer questions about Mohammad professionally and helpfully. If asked about topics outside his expertise, politely redirect to his areas of specialization. Keep responses concise but informative.`;
 
-// Chat endpoint
+// Chat endpoint with streaming support
 router.post(
   "/chat",
   validateMessage,
@@ -110,14 +110,30 @@ router.post(
             ip: req.ip
         });
         
-        return res.json({ 
-            response: "Hello! I'm Mohammad's AI assistant. The chatbot is currently in development mode. Please add your OpenAI API key to enable full functionality. You can ask me about Mohammad's background, skills, and experience, and I'll provide a helpful response based on his portfolio information."
-        });
+        // Set up SSE headers for streaming
+        res.setHeader('Content-Type', 'text/event-stream');
+        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Connection', 'keep-alive');
+        
+        const mockResponse = "Hello! I'm Mohammad's AI assistant. The chatbot is currently in development mode. Please add your OpenAI API key to enable full functionality. You can ask me about Mohammad's background, skills, and experience, and I'll provide a helpful response based on his portfolio information.";
+        
+        // Stream the mock response character by character
+        for (let i = 0; i < mockResponse.length; i++) {
+            res.write(`data: ${JSON.stringify({ content: mockResponse[i] })}\n\n`);
+            await new Promise(resolve => setTimeout(resolve, 20));
+        }
+        res.write('data: [DONE]\n\n');
+        return res.end();
     }
 
     try {
-      // Call OpenAI API
-      const completion = await openai.chat.completions.create({
+      // Set up SSE headers for streaming
+      res.setHeader('Content-Type', 'text/event-stream');
+      res.setHeader('Cache-Control', 'no-cache');
+      res.setHeader('Connection', 'keep-alive');
+
+      // Call OpenAI API with streaming
+      const stream = await openai.chat.completions.create({
         model: config.openai.model,
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
@@ -125,16 +141,27 @@ router.post(
         ],
         max_tokens: config.openai.maxTokens,
         temperature: config.openai.temperature,
+        stream: true,
       });
 
-      const response = completion.choices[0].message.content;
+      let fullResponse = '';
+      
+      for await (const chunk of stream) {
+        const content = chunk.choices[0]?.delta?.content || '';
+        if (content) {
+          fullResponse += content;
+          // Send each chunk as SSE
+          res.write(`data: ${JSON.stringify({ content })}\n\n`);
+        }
+      }
 
-      logger.info("Chat response generated", {
-        responseLength: response.length,
-        tokensUsed: completion.usage?.total_tokens,
+      logger.info("Chat response streamed", {
+        responseLength: fullResponse.length,
       });
 
-      res.json({ response });
+      // Send completion signal
+      res.write('data: [DONE]\n\n');
+      res.end();
     } catch (error) {
       logger.error("OpenAI API error", {
         error: error.message,
@@ -155,9 +182,9 @@ router.post(
           "Rate limit exceeded. Please wait a moment and try again.";
       }
 
-      res.status(500).json({
-        error: errorMessage,
-      });
+      res.write(`data: ${JSON.stringify({ error: errorMessage })}\n\n`);
+      res.write('data: [DONE]\n\n');
+      res.end();
     }
   }),
 );
