@@ -843,12 +843,16 @@
             return;
           }
 
-          // Handle streaming response
+          // Handle streaming response with controlled typewriter speed
           const reader = response.body.getReader();
           const decoder = new TextDecoder();
           let botMessageDiv = null;
           let botMessageContent = null;
           let fullText = '';
+          let contentBuffer = '';
+
+          // Helper function to add delay for typewriter effect
+          const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
           while (true) {
             const { done, value } = await reader.read();
@@ -862,6 +866,17 @@
                 const data = line.slice(6);
                 
                 if (data === '[DONE]') {
+                  // Display any remaining buffered content
+                  if (contentBuffer && botMessageContent) {
+                    for (const char of contentBuffer) {
+                      fullText += char;
+                      const paragraph = botMessageContent.querySelector('p');
+                      paragraph.textContent = fullText;
+                      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                      await sleep(30); // 30ms per character for smooth typing
+                    }
+                    contentBuffer = '';
+                  }
                   // Remove streaming cursor
                   if (botMessageContent) {
                     botMessageContent.classList.remove('streaming');
@@ -889,11 +904,22 @@
                       botMessageContent = botMessageDiv.querySelector('.message-content');
                     }
 
-                    // Append content with typewriter effect
-                    fullText += parsed.content;
-                    const paragraph = botMessageContent.querySelector('p');
-                    paragraph.textContent = fullText;
-                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                    // Add content to buffer and display with delay
+                    contentBuffer += parsed.content;
+                    
+                    // Display buffered content character by character
+                    while (contentBuffer.length > 0) {
+                      const char = contentBuffer[0];
+                      contentBuffer = contentBuffer.slice(1);
+                      fullText += char;
+                      const paragraph = botMessageContent.querySelector('p');
+                      paragraph.textContent = fullText;
+                      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                      
+                      // Adjust speed: 30ms for most chars, 100ms for punctuation
+                      const delay = ['.', '!', '?', ','].includes(char) ? 100 : 30;
+                      await sleep(delay);
+                    }
                   }
                 } catch (e) {
                   // Skip invalid JSON
